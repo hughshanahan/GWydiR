@@ -1,0 +1,2 @@
+C:\Users\hugh\Projects\GWydiR\GWTestR\bin\Release\GWydiR.exe.config
+C:\Users\hugh\Projects\GWydiR\GWTestR\obj\x86\Release\ResolveAssemblyReference.cache

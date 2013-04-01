@@ -1,0 +1,18 @@
+args <- commandArgs(trailingOnly = TRUE)
+gses <- read.csv(args[1],header=FALSE)
+gses <- as.vector(gses[,1])
+ofn <- args[2]
+sink(file=ofn)
+print(gses)
+library(affy)
+my.home <- getwd()
+for ( i in 1:length(gses)) {
+    g <- gses[i]
+	print(g)
+	setwd(g)
+	eSet <- rma(ReadAffy())
+	med.corr <- median(cor(exprs(eSet)))
+    print(paste(g,"Median cor =",med.corr))
+	setwd(my.home)
+}
+

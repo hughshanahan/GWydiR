@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1">
+  <asmv1:assemblyIdentity name="GWydiR.exe" version="1.0.0.16" publicKeyToken="0ccb046dff19d24c" language="neutral" processorArchitecture="x86" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="GWydiR" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="GWydiR.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWydiR.exe" size="14848">
+      <assemblyIdentity name="GWydiR" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>lOF0jsrkrGcPQ2UB6Lhx1UxJtsg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ionic.Zip.dll" size="464896">
+      <assemblyIdentity name="Ionic.Zip" version="1.9.1.5" publicKeyToken="EDBE51AD942A3F5C" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>hk4sKiG5Iyaxdj+ByDH7IQorfI0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KTH.GenericWorker.CDMI.dll" size="11776">
+      <assemblyIdentity name="KTH.GenericWorker.CDMI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>HYt4XKvAljI/v/Y2Ay8ZSu+O06Q=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.EMIC.Cloud.GenericWorker.dll" size="320512">
+      <assemblyIdentity name="Microsoft.EMIC.Cloud.GenericWorker" version="2.0.3.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>QMagBTYzDxlsldxs5eI7QEgYoXU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.EMIC.Cloud.GenericWorker.SampleNotifications.dll" size="8192">
+      <assemblyIdentity name="Microsoft.EMIC.Cloud.GenericWorker.SampleNotifications" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>e2AFNI+/4xwM2wjFQwS5/gK8j6w=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.EMIC.Cloud.Storage.Azure.dll" size="25088">
+      <assemblyIdentity name="Microsoft.EMIC.Cloud.Storage.Azure" version="2.0.3.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>pMQWRDTGz67KImUL57NgEauY3O8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.WindowsAzure.StorageClient.dll" size="366448">
+      <assemblyIdentity name="Microsoft.WindowsAzure.StorageClient" version="1.1.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>LzZ7T1qi+wYsuHbOIDCE1j+k3dA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ParallelExtensionsExtras.dll" size="175616">
+      <assemblyIdentity name="ParallelExtensionsExtras" version="1.2.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>bs/wOCP7h08mtdCilkNTKcrGJWc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="GWydiR.exe.config" size="1285">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>o/9l/AtkCWgT1qbq0pttbwSbTC8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="RGW.zip" size="185451383">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>tiMszLQ22pl7QKDAiq3qKkqtnCo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="testR.txt" size="393">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>AvoeKQYkPqlaIQ8E9rc2Xf0sRzw=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=hugh-PC\hugh" issuerKeyHash="053065881c007fb25f00999b069c45b404c68f9a" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>xyAw4dCTrGExvIX4Ycl3HbZk3q8=</DigestValue></Reference></SignedInfo><SignatureValue>fQ7EYFxGXwk1hKKP3gBX/3vaqGYuhDjbnraTOkv7rzX6Yt9jF+I6FRl9vTjSikgK6WyW0R7qk/tWrx0TrHACH68DQO8gr0ls9tV+f4rBDwClF+8bl5z635unfReGdRp/op4J4F0JxJF14NoCRMEixsgcG9A5dgNh4C3nUh+HdrE=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>0oj181kpC9KF93xWNpSv8XNN9Io0UNivPN4haM2YAoDDb5qp6MPICjqfBV7hYBMGkjNnk1gmzqzKhtkSO/8ogm/wNHAcL5f+eRUKYcH2EItxU1t8Uzp4DTYpkN+1u6x6A3iHXQKgtTCCNZ3pIbtZOSCjXygbH6KUDUSqC4Vysqs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="afde64b61d77c961f885bc3161ac93d0e13020c7" Description="" Url=""><as:assemblyIdentity name="GWydiR.exe" version="1.0.0.16" publicKeyToken="0ccb046dff19d24c" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=hugh-PC\hugh</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>DxxlKR/ht51kXEm7AEIZt1Ai04o=</DigestValue></Reference></SignedInfo><SignatureValue>gyOHxmpoZ4RdxECu9yRUYuReSWEaofMhAfJAocA/SkR9lnR5bSY7EHy/ZcJrWWbxlP0D1Z2WfDxk7M3wMU7w5p257MyfZBoXVoRrqQhlqPBp51zahznfPDV1PNMrKZs45YYXrq28q0g6Mkst5DCOn7t9rFuuLATZX85QnINpmGg=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>0oj181kpC9KF93xWNpSv8XNN9Io0UNivPN4haM2YAoDDb5qp6MPICjqfBV7hYBMGkjNnk1gmzqzKhtkSO/8ogm/wNHAcL5f+eRUKYcH2EItxU1t8Uzp4DTYpkN+1u6x6A3iHXQKgtTCCNZ3pIbtZOSCjXygbH6KUDUSqC4Vysqs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIByTCCATKgAwIBAgIQclFYZawT96ZB0JlIxHNUpjANBgkqhkiG9w0BAQUFADAjMSEwHwYDVQQDHhgAaAB1AGcAaAAtAFAAQwBcAGgAdQBnAGgwHhcNMTIwNjIyMjMyNTMwWhcNMTMwNjIzMDUyNTMwWjAjMSEwHwYDVQQDHhgAaAB1AGcAaAAtAFAAQwBcAGgAdQBnAGgwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANKI9fNZKQvShfd8VjaUr/FzTfSKNFDYrzzeIWjNmAKAw2+aqejDyAo6nwVe4WATBpIzZ5NYJs6syobZEjv/KIJv8DRwHC+X/nkVCmHB9hCLcVNbfFM6eA02KZDftbusegN4h10CoLUwgjWd6SG7WTkgo18oGx+ilA1EqguFcrKrAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAANLTD+o9pIEKh798Po4nKrwJMdW90TphozefCvB8iuKxGOYKJMfe30Zcmig7JeRgFNXnHLBP9oZ7RCHROp1UHzqs1VWPM4sXMG71Ibt2UgnMbt3QuWA/MpdkHeW2NjlgfaZUFp214MxZTdzXzniKmfw2wp09tKwvPeugHr6c1rw=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
