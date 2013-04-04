@@ -16,3 +16,13 @@ C:\Users\hugh\Projects\GWydiR\GWTestR\obj\x86\Debug\GWydiR.pdb
 C:\Users\hugh\Projects\github\GWydiR\GWydiR\bin\Debug\GWydiR.exe.config
 C:\Users\hugh\Projects\github\GWydiR\GWydiR\obj\x86\Debug\GWydiR.exe
 C:\Users\hugh\Projects\github\GWydiR\GWydiR\obj\x86\Debug\GWydiR.pdb
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\bin\Debug\RGW.zip
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\bin\Debug\GWydiR.exe.manifest
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\bin\Debug\GWydiR.application
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\bin\Debug\GWydiR.exe
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\bin\Debug\GWydiR.pdb
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\bin\Debug\Microsoft.WindowsAzure.StorageClient.dll
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\bin\Debug\Microsoft.WindowsAzure.StorageClient.xml
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\obj\x86\Debug\GWydiR.exe.manifest
+C:\Users\hugh\Projects\github\GWydiR\GWydiR\obj\x86\Debug\GWydiR.application

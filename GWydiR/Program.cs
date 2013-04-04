@@ -54,19 +54,19 @@ namespace GWydiR
             }
 
             
-            string RFileName = getParamVariable(paramsData,"RFileName",@"C:\Users\hugh\Dropbox\ForAnne\Script1.R");
+            string RFileName = getParamVariable(paramsData,"RFileName",@"");
 
-            string userZipFileName = getParamVariable(paramsData,"userZipFileName",@"C:\Users\hugh\Dropbox\ForAnne\RExtraFiles.zip");
+            string userZipFileName = getParamVariable(paramsData,"userZipFileName","");
 
             string csvFileName = getParamVariable(paramsData,"csvFileName",@"C:\Users\hugh\list.txt");
 
             string outputRoot = getParamVariable(paramsData,"outputRoot",@"test");
 
-            string appKeyFile = getParamVariable(paramsData,"appKeyFile",@"C:\Users\hugh\appKeyFile.txt");
+            string appKeyFile = getParamVariable(paramsData,"appKeyFile",@"");
 
-            string myApplicationName = getParamVariable(paramsData,"ApplicationURL",@"http://www.shanahanlab.org/GWydiR");
+            string myApplicationName = getParamVariable(paramsData,"ApplicationURL",@"");
 
-			string serviceURL = getParamVariable(paramsData,"serviceURL",@"http://ctqmgwdemo.cloudapp.net/");
+			string serviceURL = getParamVariable(paramsData,"serviceURL",@"");
 
 			UserDataStoreConnectionString = getConnectionString(appKeyFile);
 
@@ -136,8 +136,11 @@ namespace GWydiR
                 createArgument(jobFileName, "OutputFile", mySimpleJobDescription, blobContainer,nameOut: nameOut);
 
             // Finally an optional zip file of additional material
-                createArgument(userZipFileName, "userZip", mySimpleJobDescription, blobContainer);
-        
+                if (!userZipFileName.Equals(""))
+                {
+                    createArgument(userZipFileName, "userZip", mySimpleJobDescription, blobContainer);
+                }
+
                 Console.WriteLine("Done");
 
 
