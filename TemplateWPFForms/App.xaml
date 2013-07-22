@@ -1,0 +1,10 @@
+﻿<Application x:Class="TemplateWPFForms.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local ="clr-namespace:GWydiR;assembly=GWydiR"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <local:AuthorisationModel x:Key="AuthorisationModel">
+        </local:AuthorisationModel>
+    </Application.Resources>
+</Application>

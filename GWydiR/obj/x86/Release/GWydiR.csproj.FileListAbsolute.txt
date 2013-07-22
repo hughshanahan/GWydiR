@@ -1,2 +1,4 @@
 C:\Users\hugh\Projects\GWydiR\GWTestR\bin\Release\GWydiR.exe.config
 C:\Users\hugh\Projects\GWydiR\GWTestR\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Jasper\GWydiR\GWydiR\obj\x86\Release\GWydiR.csprojResolveAssemblyReference.cache
+C:\Users\Jasper\GWydiR\GWydiR\bin\Release\GWydiR.exe.config

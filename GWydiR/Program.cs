@@ -19,32 +19,52 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace GWydiR
 {
+    /// <summary>
+    /// This is a simple class used to upload to and run r scripts on remote machines over the windows azure service
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// String used to connect to a users data store on the azure service
+        /// </summary>
         private static string UserDataStoreConnectionString;
 
+        /// <summary>
+        /// Where the magic happens (program enters here)
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             #region select input data
 
+            // Ask the user enter the location of a parameter file
             Console.WriteLine("Location of parameter file is " + Properties.Settings.Default.setupParams);
             Console.WriteLine("Enter new location or press <Enter> if you want to keep it");
 
+            
             var newParamsFile = Console.ReadLine();
+            // if a new parameter location is given then set the Properties.Settings value holding the current location of the params
+            // file to the new loctaion, given by the user.
             if ( newParamsFile != String.Empty ){
                  Properties.Settings.Default.setupParams = newParamsFile;
                  Properties.Settings.Default.Save();
             }
 
+            // read in params from file at location in Properties.Settings.setupParams
             var paramsData = readParams();
             string doUpload = "";
             string dataKeyFile = "";
 
+            // if the key doUpload is present
             if ( paramsData.ContainsKey("doUpload")){
+                // get the data given in the params file for param 'doUpload'
                 doUpload = paramsData["doUpload"];
+                // if a key 'dataKeyFile' is peresent in the params data
                 if ( paramsData.ContainsKey("dataKeyFile")){
+                    // Get the location of that dataKeyFile file
                     dataKeyFile = paramsData["dataKeyFile"];
                 }
+                // else the user has failed to submit the required data
                 else{
                     Console.Write("If you wish to upload the R environment, you must set the access to mass store via the dataKeyFile");
                     Console.Write("Press Return to Exit");
@@ -53,7 +73,8 @@ namespace GWydiR
                 }
             }
 
-            
+            // Here the locations of files used in this program are intialised from the params file given.
+            #region initilaise file locations
             string RFileName = getParamVariable(paramsData,"RFileName",@"");
 
             string userZipFileName = getParamVariable(paramsData,"userZipFileName","");
@@ -69,18 +90,21 @@ namespace GWydiR
 			string serviceURL = getParamVariable(paramsData,"serviceURL",@"");
 
 			UserDataStoreConnectionString = getConnectionString(appKeyFile);
+            #endregion
 
             #endregion
 
             #region Upload application zip
+
+            // test to see if the value of doUpload is the character y
             if ( doUpload.Equals("y") ){
-       
+                // if yes, inform the user that an uplod is begining
                 Console.Write("Uploading application ZIP.. ");
 
                 Reference appReference = null;
                 Reference descReference = null;
 
-            // upload and install application - creates application package and description
+                // upload and install application - creates application package and description
                 UploadApplication(UserDataStoreConnectionString, myApplicationName, dataKeyFile, out appReference, out descReference);
 
             }
@@ -89,19 +113,21 @@ namespace GWydiR
 
             #region Set up containers for input, output etc.
 
+            // initialise an account object from a data stroe connection string
             var account = CloudStorageAccount.Parse(UserDataStoreConnectionString);
+            // retrieve a blob client from that account
             var blobClient = account.CreateCloudBlobClient();
 
-            // Initial set up of container
-            // Create a new container (folder) for storing the application
+            // get a container from the blob (containers store data like flat directories)
             CloudBlobContainer appDataContainer = blobClient.GetContainerReference("applicationcontainer");
+            // if the requested container does not exist, create it
             appDataContainer.CreateIfNotExist();
 
-            // Create a second container for storing the input and output files
-
+            // Apply the same as above.
             var blobContainer = blobClient.GetContainerReference("testcontainer");
             blobContainer.CreateIfNotExist();
 
+            // retrieve the jobs to be run from a csv file, location given in params file
             var items = determineJobs(csvFileName);
 
             foreach ( string item in items ){

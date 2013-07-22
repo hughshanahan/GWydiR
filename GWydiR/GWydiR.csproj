@@ -15,10 +15,14 @@
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <SccProjectName>Svn</SccProjectName>
-    <SccLocalPath>Svn</SccLocalPath>
-    <SccAuxPath>Svn</SccAuxPath>
-    <SccProvider>SubversionScc</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <PublishUrl>F:\Downloads\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -67,6 +71,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4114.6375, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Documents\bccrypto-net-1.7-bin\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\..\Downloads\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -89,20 +97,44 @@
     <Reference Include="ParallelExtensionsExtras">
       <HintPath>..\..\..\Downloads\ParallelExtensionsExtras.dll</HintPath>
     </Reference>
+    <Reference Include="Pluralsight.Crypto">
+      <HintPath>..\..\Documents\SelfCert\SelfCert\Pluralsight.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\Documents\Rhino.Mocks-3.6-Build-21\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\GWydiRHandlers.cs" />
+    <Compile Include="Interfaces\ModelInterfaces\IWizard.cs" />
+    <Compile Include="Interfaces\UtilityInterfaces\ICertificateMaker.cs" />
+    <Compile Include="Interfaces\ViewInterfaces\IViewError.cs" />
+    <Compile Include="Models\AuthorisationModel.cs" />
+    <Compile Include="Utilities\CertificateMaker.cs" />
+    <Compile Include="Utilities\CertificateManager.cs" />
+    <Compile Include="Utilities\FileReader.cs" />
+    <Compile Include="Utilities\FileWriter.cs" />
+    <Compile Include="Interfaces\ViewInterfaces\IAuthorisationView.cs" />
+    <Compile Include="Exceptions\InvalidSIDException.cs" />
+    <Compile Include="Interfaces\ViewInterfaces\ITabNavigation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -110,18 +142,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="Models\Wizard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="GWR_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="RGW.zip">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -147,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
