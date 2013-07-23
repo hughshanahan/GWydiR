@@ -42,5 +42,17 @@ namespace GWydiR.Interfaces.ViewInterfaces
         /// <param name="handler"></param>
         void DeRegisterNewSubscription(GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler handler);
 
+        /// <summary>
+        /// Method to register an event handler with the new certifiacte event
+        /// </summary>
+        /// <param name="handler"></param>
+        void RegisterNewCertificate(GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler handler);
+
+        /// <summary>
+        /// Method to remove the delegate from the new certificate event.
+        /// </summary>
+        /// <param name="handler"></param>
+        void DeRegisterNewCerticate(GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler handler);
+
     }
 }

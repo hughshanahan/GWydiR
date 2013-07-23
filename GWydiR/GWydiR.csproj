@@ -73,38 +73,31 @@
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.7.4114.6375, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Documents\bccrypto-net-1.7-bin\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>bin\Debug\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip">
-      <HintPath>..\..\..\Downloads\Ionic.Zip.dll</HintPath>
+      <HintPath>bin\Debug\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="KTH.GenericWorker.CDMI">
-      <HintPath>..\..\..\Downloads\KTH.GenericWorker.CDMI.dll</HintPath>
+      <HintPath>bin\Debug\KTH.GenericWorker.CDMI.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EMIC.Cloud.GenericWorker">
-      <HintPath>..\..\..\Downloads\Microsoft.EMIC.Cloud.GenericWorker.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.EMIC.Cloud.GenericWorker.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EMIC.Cloud.GenericWorker.SampleNotifications">
-      <HintPath>..\..\..\Downloads\Microsoft.EMIC.Cloud.GenericWorker.SampleNotifications.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.EMIC.Cloud.GenericWorker.SampleNotifications.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EMIC.Cloud.Storage.Azure">
-      <HintPath>..\..\..\Downloads\Microsoft.EMIC.Cloud.Storage.Azure.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.EMIC.Cloud.Storage.Azure.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Windows Azure SDK\v1.6\ref\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
-    </Reference>
-    <Reference Include="ParallelExtensionsExtras">
-      <HintPath>..\..\..\Downloads\ParallelExtensionsExtras.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.StorageClient">
+      <HintPath>bin\Debug\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
     </Reference>
     <Reference Include="Pluralsight.Crypto">
-      <HintPath>..\..\Documents\SelfCert\SelfCert\Pluralsight.Crypto.dll</HintPath>
+      <HintPath>..\..\..\SelfCert\SelfCert\Pluralsight.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\Documents\Rhino.Mocks-3.6-Build-21\Rhino.Mocks.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -126,6 +119,7 @@
     <Compile Include="Handlers\GWydiRHandlers.cs" />
     <Compile Include="Interfaces\ModelInterfaces\IWizard.cs" />
     <Compile Include="Interfaces\UtilityInterfaces\ICertificateMaker.cs" />
+    <Compile Include="Interfaces\UtilityInterfaces\ICertificateManager.cs" />
     <Compile Include="Interfaces\ViewInterfaces\IViewError.cs" />
     <Compile Include="Models\AuthorisationModel.cs" />
     <Compile Include="Utilities\CertificateMaker.cs" />
@@ -144,6 +138,8 @@
     </Compile>
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Models\Wizard.cs" />
+    <Compile Include="Utilities\SubscriptionFileParser.cs" />
+    <Compile Include="Wrappers\CertificateStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

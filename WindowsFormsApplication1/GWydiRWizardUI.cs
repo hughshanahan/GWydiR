@@ -15,7 +15,15 @@ namespace WindowsFormsApplication1
     public partial class GWydiRWizardUI : Form, IAuthorisationView, ITabNavigation, IViewError
     {
 
+        /// <summary>
+        /// Event to be called when the AddNewSidBtn is clicked
+        /// </summary>
         public event GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler NewSubscription;
+
+        /// <summary>
+        /// Event to be called when the AddNewCertBtn is cliked
+        /// </summary>
+        public event GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler NewCertificate;
 
         public GWydiRWizardUI()
         {
@@ -87,6 +95,26 @@ namespace WindowsFormsApplication1
         public void NotifyOfError(Exception e)
         {
             MessageBox.Show(e.Message);
+        }
+
+
+        public void RegisterNewCertificate(GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler handler)
+        {
+            NewCertificate += handler;
+        }
+
+        public void DeRegisterNewCerticate(GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler handler)
+        {
+            NewCertificate -= handler;
+        }
+
+        private void AddNewCertBtn_Click(object sender, EventArgs e)
+        {
+            // open mesage box
+            String newCertificate = Interaction.InputBox("Please eventer to whom the certificate is being issued", "Subject Name");
+            // raise event if not empty
+            if (NewCertificate != null)
+                NewCertificate(newCertificate);
         }
     }
 }

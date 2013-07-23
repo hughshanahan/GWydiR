@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
             Application.SetCompatibleTextRenderingDefault(false);
 
             GWydiRWizardUI ui = new GWydiRWizardUI();
-            Wizard wizard = new Wizard();
+            Wizard wizard = new Wizard(); // need to add an object to congiure the wizard from subscritions/config files
             AuthorisationModel authModel = new AuthorisationModel(ui, wizard);
 
             Application.Run(ui);

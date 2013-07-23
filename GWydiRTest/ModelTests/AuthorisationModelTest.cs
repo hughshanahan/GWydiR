@@ -68,8 +68,6 @@ namespace GWydiRTest.ModelTests
             IAuthorisationView mockView = MockRepository.GenerateStub<IAuthorisationView>();
             mockView.Expect(x => x.DisplaySubsriptions(Arg<List<string>>.Is.Anything));
             IWizard mockWizard = MockRepository.GenerateStub<IWizard>();
-            mockWizard.Expect(x => x.addSID(Arg<string>.Is.Anything));
-            mockWizard.SIDList = new List<string>();
             model = new OverRiddenAuthorisationModel_1(mockView, mockWizard);
             model.NewSubscriptionHandler(string.Empty);
             mockView.VerifyAllExpectations();

@@ -6,6 +6,7 @@ using System.IO;
 using NUnit.Framework;
 using Rhino.Mocks;
 using GWydiR;
+using GWydiR.Utilities;
 
 namespace GWydiR.Test
 {
@@ -255,10 +256,69 @@ namespace GWydiR.Test
             Assert.IsTrue(wizard.SIDList[wizard.SIDList.Count-1] != "");
         }
 
+        class OverRiddenWizard_2 : Wizard
+        {
 
+            public OverRiddenWizard_2()
+            {
+                
+            }
 
+            protected override SubscriptionFileParser makeSubscriptionsParser()
+            {
+                SubscriptionFileParser mockParser = MockRepository.GenerateStub<SubscriptionFileParser>();
+                mockParser.Expect(x => x.ParseCertificateNames(Arg<List<List<string>>>.Is.Anything)).Return(new List<string>());
+                mockParser.Stub(x => x.ParseSubscriptions(Arg<List<string>>.Is.Anything)).Return(new List<List<string>>());
+                mockParser.Stub(x => x.ParseSids(Arg<List<List<string>>>.Is.Anything)).Return(new List<string>());
+                return mockParser;
+            }
+            
+        }
 
+        [Test]
+        public void HasCertTest()
+        {
+            //Arrange
+            string testName1 = "testname1";
+            wizard = new OverRiddenWizard_2();
 
+            //Act
+            bool pass = wizard.HasCert(testName1);
+
+            //Assert
+            Assert.IsFalse(pass);
+        }
+
+        [Test]
+        public void AddCertTest()
+        {
+            //Arrange
+            string testName = "testName";
+            wizard = new OverRiddenWizard_2();
+
+            //Act
+            wizard.AddCertificate(testName);
+            List<string> output = wizard.CertList;
+
+            //Assert
+            Assert.IsTrue(output[0] == testName);
+        }
+
+        [Test]
+        public void AddMultipleCertsAddNoDuplicatesTest()
+        {
+            //Arrange
+            string testName = "testName";
+            wizard = new OverRiddenWizard_2();
+
+            //Act
+            wizard.AddCertificate(testName);
+            wizard.AddCertificate(testName);
+            List<string> output = wizard.CertList;
+
+            //Assert
+            Assert.IsTrue(output.Count == 1);
+        }
 
     }
 }

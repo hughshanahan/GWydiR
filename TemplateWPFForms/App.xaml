@@ -4,7 +4,5 @@
              xmlns:local ="clr-namespace:GWydiR;assembly=GWydiR"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <local:AuthorisationModel x:Key="AuthorisationModel">
-        </local:AuthorisationModel>
     </Application.Resources>
 </Application>

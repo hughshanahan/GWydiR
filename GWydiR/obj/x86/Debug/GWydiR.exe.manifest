@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWydiR.exe" size="20480">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWydiR.exe" size="25088">
       <assemblyIdentity name="GWydiR" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>NKWPacZX8CLeMhtWK6d/TVlGrpo=</dsig:DigestValue>
+        <dsig:DigestValue>gTwx8GX/eyqv3WMtrgPwKgNiy7E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -158,18 +158,6 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
         <dsig:DigestValue>3FitsYf1Fn8PshwIX42oQz+nXqQ=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Rhino.Mocks.dll" size="317952">
-      <assemblyIdentity name="Rhino.Mocks" version="3.6.0.0" publicKeyToken="0B3305902DB7183F" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>k3sPQXGDGAGI8Op/QK7bPFw+5FQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

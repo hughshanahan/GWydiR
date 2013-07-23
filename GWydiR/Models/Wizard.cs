@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using GWydiR.Utilities;
 
 namespace GWydiR
 {
@@ -11,47 +12,72 @@ namespace GWydiR
     {
 
         private string SubscriptionsFileName;
+
         public List<string> SIDList { get; set; }
 
+        public List<string> CertList { get; set; }
+
+        public List<string> GetSIDList()
+        {
+            if (SIDList.Count < 1)
+            {
+                SIDList = (makeSubscriptionsParser()).ParseSids(SubscriptionsList);
+            }
+            return SIDList;
+        }
+
+        public List<string> GetCertList()
+        {
+            if (CertList.Count < 1)
+            {
+                CertList = (makeSubscriptionsParser()).ParseCertificateNames(SubscriptionsList);
+            }
+            return CertList;
+        }
+
+        private List<List<string>> SubscriptionsList { get; set; }
+
+        // this does too much work, should abstract out file reading and writing in the constructor to another class
+        // dedicated to reading in SID's
         public Wizard()
         {
 
             // get a palce to store app data
             SubscriptionsFileName = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Subscriptions.dat";
 
+            SubscriptionsList = new List<List<string>>();
             SIDList = new List<string>();
+            CertList = new List<string>();
+            #region needs moving to setup/parser object
             // if there is a file of subscitions to read
             if (File.Exists(SubscriptionsFileName))
             {
                 // open in and fill SIDList with it's contense
                 FileReader reader = makeReader();
-                SIDList = reader.Read(SubscriptionsFileName);
+                SubscriptionFileParser parser = makeSubscriptionsParser();
+                SubscriptionsList = parser.ParseSubscriptions(reader.Read(SubscriptionsFileName));
             }
             else
             {
                 // else create the file for future use. This way we can assume, unless an exception occurs, that the subscriptions file exists.
                 FileWriter writer = makeWriter();
-                writer.Create(SubscriptionsFileName);//TODO currently broken
+                writer.Create(SubscriptionsFileName);
             }
+            #endregion
         }
 
-        /// <summary>
-        /// Method to deal with button clicks from UI
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CreateButtonClick(object sender, EventArgs e, string SID)
+        public Wizard(List<List<string>> SubscriptionList)
         {
-            Console.WriteLine("Eventhandler");
-            if (!hasSID(SID))
-            {
-                addSID(SID);
-            }
-            else
-            {
-                Console.WriteLine("Already have SID {0}",SID);
-            }
+            this.SubscriptionsList = SubscriptionsList;
+            SubscriptionsFileName = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Subscriptions.dat";
         }
+
+        protected virtual SubscriptionFileParser makeSubscriptionsParser()
+        {
+            return new SubscriptionFileParser();
+        }
+
+
         /// <summary>
         /// Factory method for file reader, abstraction for isolation testing
         /// </summary>
@@ -73,7 +99,8 @@ namespace GWydiR
         public bool hasSID(string SID)
         {
             //check it exists in the list
-            bool returnValue = SIDList.Contains(SID);
+            List<string> sidList = GetSIDList();
+            bool returnValue = sidList.Contains(SID);
             // return true if it is, false if not
             return returnValue;
         }
@@ -111,14 +138,26 @@ namespace GWydiR
                 // add it to the list
                 SIDList.Add(SID);
             }
-
-            // once added to the list, it should also be written to the file
-            // so that future intantiations of the object will have access to this new
-            // SID
-            FileWriter writer = makeWriter();
-            writer.Write(SubscriptionsFileName, SID);
         }
 
+        public void AddCertificate(string certName)
+        {
+            //if certificate exists, don't add it
+            if(!HasCert(certName))
+                CertList.Add(certName);
+        }
 
+        public bool HasCert(string testName1)
+        {
+            bool returnValue = false;
+            //check each certificate name
+            foreach (string name in CertList)
+            {
+                //if matches return true
+                if(name == testName1)
+                    returnValue = true;
+            }
+            return returnValue;
+        }
     }
 }

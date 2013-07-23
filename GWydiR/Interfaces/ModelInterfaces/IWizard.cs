@@ -7,11 +7,13 @@ namespace GWydiR.Interfaces.ModelInterfaces
 {
     public interface IWizard
     {
-        List<string> SIDList { get; set; }
+        List<string> GetSIDList();
+        List<string> GetCertList();
          FileReader makeReader();
          FileWriter makeWriter();
          bool hasSID(string SID);
          bool isValidSID(string SID);
          void addSID(string SID);
+         void AddCertificate(string certName);
     }
 }

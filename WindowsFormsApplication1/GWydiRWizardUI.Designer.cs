@@ -113,6 +113,7 @@
             this.AddNewCertBtn.TabIndex = 3;
             this.AddNewCertBtn.Text = "New";
             this.AddNewCertBtn.UseVisualStyleBackColor = true;
+            this.AddNewCertBtn.Click += new System.EventHandler(this.AddNewCertBtn_Click);
             // 
             // CertComboBx
             // 
