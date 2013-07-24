@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using GWydiR.Utilities;
+using GWydiR.Containers;
 
 namespace GWydiR
 {
@@ -35,7 +36,7 @@ namespace GWydiR
             return CertList;
         }
 
-        private List<List<string>> SubscriptionsList { get; set; }
+        private List<Subscription> SubscriptionsList { get; set; }
 
         // this does too much work, should abstract out file reading and writing in the constructor to another class
         // dedicated to reading in SID's
@@ -45,7 +46,7 @@ namespace GWydiR
             // get a palce to store app data
             SubscriptionsFileName = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Subscriptions.dat";
 
-            SubscriptionsList = new List<List<string>>();
+            SubscriptionsList = new List<Subscription>();
             SIDList = new List<string>();
             CertList = new List<string>();
             #region needs moving to setup/parser object
@@ -157,6 +158,41 @@ namespace GWydiR
                 if(name == testName1)
                     returnValue = true;
             }
+            return returnValue;
+        }
+
+        /// <summary>
+        /// A method to add a new subscription to the subscriptions list.
+        /// </summary>
+        /// <param name="SID"></param>
+        /// <param name="CertificateName"></param>
+        public void AddSubscription(string SID, string certificateName, string certificateThumbPrint)
+        {
+            if (!HasSubscription(SID, certificateName))
+            {
+                Subscription subscription = new Subscription();
+                subscription.SID = SID;
+                subscription.CertName = certificateName;
+                subscription.ThumbPrint = certificateThumbPrint;
+                SubscriptionsList.Add(subscription);
+            }
+        }
+
+        public List<Subscription> GetSubscriptions()
+        {
+            return SubscriptionsList;
+        }
+
+        public bool HasSubscription(string testSID, string testCertName)
+        {
+            bool returnValue = false;
+
+            foreach (Subscription subscription in SubscriptionsList)
+            {
+                if (subscription.SID == testSID && subscription.CertName == testCertName)
+                    returnValue = true;
+            }
+
             return returnValue;
         }
     }

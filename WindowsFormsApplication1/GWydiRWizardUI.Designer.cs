@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GWydiRWizardUI));
             this.WizardTabPanel = new System.Windows.Forms.TabControl();
             this.AuthorisationTab = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.CertificatePictureBx = new System.Windows.Forms.PictureBox();
             this.AddNewCertBtn = new System.Windows.Forms.Button();
             this.CertComboBx = new System.Windows.Forms.ComboBox();
+            this.CertificatePictureBx = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.SubscriptionPictureBx = new System.Windows.Forms.PictureBox();
             this.AddNewSIDBtn = new System.Windows.Forms.Button();
             this.SIDComboBx = new System.Windows.Forms.ComboBox();
+            this.SubscriptionPictureBx = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NavigateNextBtn = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -80,34 +81,26 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.CertificatePictureBx);
             this.panel3.Controls.Add(this.AddNewCertBtn);
             this.panel3.Controls.Add(this.CertComboBx);
-            this.panel3.Location = new System.Drawing.Point(10, 185);
+            this.panel3.Controls.Add(this.CertificatePictureBx);
+            this.panel3.Location = new System.Drawing.Point(10, 172);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(594, 180);
+            this.panel3.Size = new System.Drawing.Size(594, 170);
             this.panel3.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(283, 151);
+            this.label2.Location = new System.Drawing.Point(283, 153);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Certificate";
             // 
-            // CertificatePictureBx
-            // 
-            this.CertificatePictureBx.Location = new System.Drawing.Point(3, 3);
-            this.CertificatePictureBx.Name = "CertificatePictureBx";
-            this.CertificatePictureBx.Size = new System.Drawing.Size(588, 112);
-            this.CertificatePictureBx.TabIndex = 5;
-            this.CertificatePictureBx.TabStop = false;
-            // 
             // AddNewCertBtn
             // 
-            this.AddNewCertBtn.Location = new System.Drawing.Point(536, 147);
+            this.AddNewCertBtn.Location = new System.Drawing.Point(536, 149);
             this.AddNewCertBtn.Name = "AddNewCertBtn";
             this.AddNewCertBtn.Size = new System.Drawing.Size(48, 21);
             this.AddNewCertBtn.TabIndex = 3;
@@ -119,20 +112,30 @@
             // 
             this.CertComboBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CertComboBx.FormattingEnabled = true;
-            this.CertComboBx.Location = new System.Drawing.Point(343, 147);
+            this.CertComboBx.Location = new System.Drawing.Point(343, 149);
             this.CertComboBx.Name = "CertComboBx";
             this.CertComboBx.Size = new System.Drawing.Size(187, 21);
             this.CertComboBx.TabIndex = 1;
             // 
+            // CertificatePictureBx
+            // 
+            this.CertificatePictureBx.Image = ((System.Drawing.Image)(resources.GetObject("CertificatePictureBx.Image")));
+            this.CertificatePictureBx.InitialImage = ((System.Drawing.Image)(resources.GetObject("CertificatePictureBx.InitialImage")));
+            this.CertificatePictureBx.Location = new System.Drawing.Point(-4, -7);
+            this.CertificatePictureBx.Name = "CertificatePictureBx";
+            this.CertificatePictureBx.Size = new System.Drawing.Size(605, 155);
+            this.CertificatePictureBx.TabIndex = 5;
+            this.CertificatePictureBx.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.SubscriptionPictureBx);
             this.panel2.Controls.Add(this.AddNewSIDBtn);
             this.panel2.Controls.Add(this.SIDComboBx);
+            this.panel2.Controls.Add(this.SubscriptionPictureBx);
             this.panel2.Location = new System.Drawing.Point(10, 8);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(594, 171);
+            this.panel2.Size = new System.Drawing.Size(594, 163);
             this.panel2.TabIndex = 5;
             // 
             // label1
@@ -143,14 +146,6 @@
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Subscription ID";
-            // 
-            // SubscriptionPictureBx
-            // 
-            this.SubscriptionPictureBx.Location = new System.Drawing.Point(3, 3);
-            this.SubscriptionPictureBx.Name = "SubscriptionPictureBx";
-            this.SubscriptionPictureBx.Size = new System.Drawing.Size(588, 112);
-            this.SubscriptionPictureBx.TabIndex = 4;
-            this.SubscriptionPictureBx.TabStop = false;
             // 
             // AddNewSIDBtn
             // 
@@ -170,18 +165,29 @@
             this.SIDComboBx.Name = "SIDComboBx";
             this.SIDComboBx.Size = new System.Drawing.Size(282, 21);
             this.SIDComboBx.TabIndex = 0;
+            this.SIDComboBx.SelectedIndexChanged += new System.EventHandler(this.SIDComboBx_SelectionChangeCommitted);
+            // 
+            // SubscriptionPictureBx
+            // 
+            this.SubscriptionPictureBx.Image = ((System.Drawing.Image)(resources.GetObject("SubscriptionPictureBx.Image")));
+            this.SubscriptionPictureBx.InitialImage = ((System.Drawing.Image)(resources.GetObject("SubscriptionPictureBx.InitialImage")));
+            this.SubscriptionPictureBx.Location = new System.Drawing.Point(-7, -8);
+            this.SubscriptionPictureBx.Name = "SubscriptionPictureBx";
+            this.SubscriptionPictureBx.Size = new System.Drawing.Size(611, 140);
+            this.SubscriptionPictureBx.TabIndex = 4;
+            this.SubscriptionPictureBx.TabStop = false;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.NavigateNextBtn);
-            this.panel1.Location = new System.Drawing.Point(9, 371);
+            this.panel1.Location = new System.Drawing.Point(9, 348);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(595, 96);
+            this.panel1.Size = new System.Drawing.Size(595, 95);
             this.panel1.TabIndex = 4;
             // 
             // NavigateNextBtn
             // 
-            this.NavigateNextBtn.Location = new System.Drawing.Point(500, 40);
+            this.NavigateNextBtn.Location = new System.Drawing.Point(509, 35);
             this.NavigateNextBtn.Name = "NavigateNextBtn";
             this.NavigateNextBtn.Size = new System.Drawing.Size(75, 23);
             this.NavigateNextBtn.TabIndex = 0;
@@ -202,7 +208,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 477);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(638, 457);
             this.Controls.Add(this.WizardTabPanel);
             this.Name = "GWydiRWizardUI";
             this.Text = "GWydiR";

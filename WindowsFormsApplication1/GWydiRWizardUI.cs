@@ -25,6 +25,13 @@ namespace WindowsFormsApplication1
         /// </summary>
         public event GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler NewCertificate;
 
+        /// <summary>
+        /// A method to be called when a new item is selected in the SID list
+        /// </summary>
+        public event GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler ChangeSelectedSID;
+
+
+
         public GWydiRWizardUI()
         {
             InitializeComponent();
@@ -34,11 +41,14 @@ namespace WindowsFormsApplication1
         {
             SIDComboBx.DataSource = null;
             SIDComboBx.DataSource = subscriptions;
+            SIDComboBx.SelectedIndex = subscriptions.Count - 1;
         }
 
         public void  DisplayCertificates(List<string> certificates)
         {
+            CertComboBx.DataSource = null;
             CertComboBx.DataSource = certificates;
+            CertComboBx.SelectedIndex = certificates.Count - 1;
         }
 
         public string  GetSelectedSubscription()
@@ -115,6 +125,33 @@ namespace WindowsFormsApplication1
             // raise event if not empty
             if (NewCertificate != null)
                 NewCertificate(newCertificate);
+        }
+
+        //This is a method that should throw an event to as to allow the mdoel to deal with it
+        //fairly complex logic here, i should find a way to move this out and test it
+        private void SIDComboBx_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int index = 0;
+            if (ChangeSelectedSID != null)
+                index = ChangeSelectedSID(SIDComboBx.SelectedIndex);
+
+            if (index > -1)
+            {
+                CertComboBx.SelectedIndex = index;
+                CertComboBx.Text = ((List<string>)CertComboBx.DataSource)[index];
+            }
+        }
+
+
+
+        public void RegisterChangedSIDSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler handler)
+        {
+            ChangeSelectedSID += handler;
+        }
+
+        public void DeRegisterChangedSIDSelected(GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler handler)
+        {
+            ChangeSelectedSID -= handler;
         }
     }
 }

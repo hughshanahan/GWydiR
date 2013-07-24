@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GWydiR.Containers;
 
 namespace GWydiR.Utilities
 {
@@ -14,16 +15,21 @@ namespace GWydiR.Utilities
         // the purpose of this method is to parse the subscriptions file into a list of lists of strings,
         // each separate token between delimiters of each line will be entered into a List of strings. These
         // Lists are then added as elements to a parent lit, which is then returned.
-        public virtual List<List<string>> ParseSubscriptions(List<string> list)
+        public virtual List<Subscription> ParseSubscriptions(List<string> list)
         {
-            List<List<string>> returnList = new List<List<string>>();
+            List<Subscription> returnList = new List<Subscription>();
 
             if (list != null)
             {
                 foreach (string line in list)
                 {
                     string[] tokens = line.Split(',');
-                    returnList.Add(tokens.ToList());
+                    Subscription subscription = new Subscription();
+                    subscription.SID = tokens[0];
+                    subscription.CertName = tokens[1];
+                    subscription.ThumbPrint = tokens[2];
+                    returnList.Add(subscription);
+                    
                 }
             }
 
@@ -33,17 +39,17 @@ namespace GWydiR.Utilities
         // This method searches though a non empty list of lists of strings and puts the first element from each
         // child list into a new list, which is then returned. The purpose of this is to retrieve the SID's which are
         // stored at the begingin of each new line of the subscriptions file.
-        public virtual List<string> ParseSids(List<List<string>> subscriptionsList)
+        public virtual List<string> ParseSids(List<Subscription> subscriptionsList)
         {
             List<string> returnList = new List<string>();
             //subscriptions is not empty
             if (subscriptionsList.Count > 0)
             {
-                foreach (List<string> list in subscriptionsList)
+                foreach (Subscription subscription in subscriptionsList)
                 {
                     // add the first element from the list
                     // this should probably be madde into a hashmap for readability
-                    returnList.Add(list[0]);
+                    returnList.Add(subscription.SID);
                 }
             }
 
@@ -58,15 +64,15 @@ namespace GWydiR.Utilities
         /// </summary>
         /// <param name="subscriptionsList"></param>
         /// <returns></returns>
-        public virtual List<string> ParseCertificateNames(List<List<string>> subscriptionsList)
+        public virtual List<string> ParseCertificateNames(List<Subscription> subscriptionsList)
         {
             List<string> returnList = new List<string>();
 
-            foreach (List<string> list in subscriptionsList)
+            foreach (Subscription subscription in subscriptionsList)
             {
                 // certificate names are stored at the second position
                 // in the file
-                returnList.Add(list[1]);
+                returnList.Add(subscription.CertName);
             }
             return returnList;
         }

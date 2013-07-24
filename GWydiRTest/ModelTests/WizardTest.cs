@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using GWydiR;
 using GWydiR.Utilities;
+using GWydiR.Containers;
 
 namespace GWydiR.Test
 {
@@ -267,9 +268,9 @@ namespace GWydiR.Test
             protected override SubscriptionFileParser makeSubscriptionsParser()
             {
                 SubscriptionFileParser mockParser = MockRepository.GenerateStub<SubscriptionFileParser>();
-                mockParser.Expect(x => x.ParseCertificateNames(Arg<List<List<string>>>.Is.Anything)).Return(new List<string>());
-                mockParser.Stub(x => x.ParseSubscriptions(Arg<List<string>>.Is.Anything)).Return(new List<List<string>>());
-                mockParser.Stub(x => x.ParseSids(Arg<List<List<string>>>.Is.Anything)).Return(new List<string>());
+                mockParser.Expect(x => x.ParseCertificateNames(Arg<List<Subscription>>.Is.Anything)).Return(new List<string>());
+                mockParser.Stub(x => x.ParseSubscriptions(Arg<List<string>>.Is.Anything)).Return(new List<Subscription>());
+                mockParser.Stub(x => x.ParseSids(Arg<List<Subscription>>.Is.Anything)).Return(new List<string>());
                 return mockParser;
             }
             
@@ -318,6 +319,72 @@ namespace GWydiR.Test
 
             //Assert
             Assert.IsTrue(output.Count == 1);
+        }
+
+        /// <summary>
+        /// This test will be testing if adding the data required to make a new subscription
+        /// updates the subsciption list within the wizard object.
+        /// </summary>
+        [Test]
+        public void AddSubscriptionTest()
+        {
+            //Arrange
+            string testSID = "anSID";
+            string testCertName = "aCertName";
+            string testCertThumb = "aCertThumb";
+
+            //Act
+            wizard.AddSubscription(testSID, testCertName, testCertThumb);
+
+            //Assert
+            Assert.IsTrue(wizard.GetSubscriptions().Count == 1);
+        }
+
+        [Test]
+        public void HasSubscriptionFalseTest()
+        {
+            //Arrange
+            string testSID = "anSID";
+            string testCertName = "aCertName";
+            string testCertThumb = "aCertThumb";
+
+            //Act
+            bool pass = wizard.HasSubscription(testSID, testCertName);
+            
+            //Assert
+            Assert.IsFalse(pass);
+        }
+
+        [Test]
+        public void HasSubscriptionTrueTest()
+        {
+            //Arrange
+            string testSID = "anSID";
+            string testCertName = "aCertName";
+            string testCertThumb = "aCertThumb";
+
+            //Act
+            wizard.AddSubscription(testSID, testCertName, testCertThumb);
+            bool pass = wizard.HasSubscription(testSID, testCertName);
+
+            //Assert
+            Assert.IsTrue(pass);
+        }
+
+        [Test]
+        public void AddMultipleSubscriptionsTest()
+        {
+            //Arrange
+            string testSID = "anSID";
+            string testCertName = "aCertName";
+            string testCertThumb = "aCertThumb";
+            
+            //Act
+            wizard.AddSubscription(testSID, testCertName, testCertThumb); 
+            wizard.AddSubscription(testSID, testCertName, testCertThumb);
+
+            //Assert
+            Assert.IsTrue(wizard.GetSubscriptions().Count == 1);
         }
 
     }

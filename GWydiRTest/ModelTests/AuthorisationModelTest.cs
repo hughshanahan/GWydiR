@@ -73,11 +73,5 @@ namespace GWydiRTest.ModelTests
             mockView.VerifyAllExpectations();
         }
 
-
-
-
-
-        
-
     }
 }

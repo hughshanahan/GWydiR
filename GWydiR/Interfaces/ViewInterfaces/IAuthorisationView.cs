@@ -54,5 +54,17 @@ namespace GWydiR.Interfaces.ViewInterfaces
         /// <param name="handler"></param>
         void DeRegisterNewCerticate(GWydiR.Handlers.GWydiRHandlers.NewDataEventHandler handler);
 
+        /// <summary>
+        /// Method to add delegate to respond to change in selected SID event
+        /// </summary>
+        /// <param name="handler"></param>
+        void RegisterChangedSIDSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler handler);
+
+        /// <summary>
+        /// Method to remove delegate that responds to changed selected SID event
+        /// </summary>
+        /// <param name="handler"></param>
+        void DeRegisterChangedSIDSelected(GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler handler);
+
     }
 }

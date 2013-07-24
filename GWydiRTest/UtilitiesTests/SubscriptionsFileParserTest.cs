@@ -5,6 +5,7 @@ using System.Text;
 using GWydiR.Utilities;
 using NUnit.Framework;
 using Rhino.Mocks;
+using GWydiR.Containers;
 
 namespace GWydiRTest.UtilitiesTests
 {
@@ -28,12 +29,12 @@ namespace GWydiRTest.UtilitiesTests
             List<string> testFileData = new List<string>() { test1+","+test2+","+test3 };
 
             //Act
-            List<List<string>> output = parser.ParseSubscriptions(testFileData);
+            List<Subscription> output = parser.ParseSubscriptions(testFileData);
 
             //Assert
-            Assert.IsTrue(output[0][0] == test1);
-            Assert.IsTrue(output[0][1] == test2);
-            Assert.IsTrue(output[0][2] == test3);
+            Assert.IsTrue(output[0].SID == test1);
+            Assert.IsTrue(output[0].CertName == test2);
+            Assert.IsTrue(output[0].ThumbPrint == test3);
         }
 
         [Test]
@@ -44,11 +45,18 @@ namespace GWydiRTest.UtilitiesTests
             string test2 = "test2";
             string test3 = "test3";
 
-            List<string> list1 = new List<string>() { test1 };
-            List<string> list2 = new List<string>() { test2 };
-            List<string> list3 = new List<string>() { test3 };
+            Subscription list1 = new Subscription();
+            list1.SID = test1;
+            Subscription list2 = new Subscription();
+            list2.SID = test2;
+            Subscription list3 = new Subscription();
+            list3.SID = test3;
 
-            List<List<string>> testList = new List<List<string>>() { list1, list2, list3 };
+
+            List<Subscription> testList = new List<Subscription>();
+            testList.Add(list1);
+            testList.Add(list2);
+            testList.Add(list3);
 
             //Act
             List<string> output = parser.ParseSids(testList);
@@ -66,9 +74,12 @@ namespace GWydiRTest.UtilitiesTests
             string testSID1 = "anSID";
             string testCert1 = "aCert";
 
-            List<string> list1 = new List<string>() { testSID1,testCert1};
+            Subscription list1 = new Subscription();
+            list1.SID = testSID1;
+            list1.CertName = testCert1;
 
-            List<List<string>> testList = new List<List<string>>() { list1 };
+            List<Subscription> testList = new List<Subscription>();
+            testList.Add(list1);
 
             //Act
             List<string> output = parser.ParseCertificateNames(testList);
@@ -87,10 +98,16 @@ namespace GWydiRTest.UtilitiesTests
             string testCert1 = "cert1";
             string testCert2 = "cert2";
 
-            List<string> list1 = new List<string>() { testSid1, testCert1 };
-            List<string> list2 = new List<string>() { testSid2, testCert2 };
+            Subscription list1 = new Subscription();
+            list1.SID = testSid1;
+            list1.CertName = testCert1;
+            Subscription list2 = new Subscription();
+            list2.SID = testSid2;
+            list2.CertName = testCert2;
 
-            List<List<string>> testList = new List<List<string>>() { list1, list2 };
+            List<Subscription> testList = new List<Subscription>();
+            testList.Add(list1);
+            testList.Add(list2);
 
             //Act
             List<string> output = parser.ParseCertificateNames(testList);
