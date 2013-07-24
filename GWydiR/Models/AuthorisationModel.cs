@@ -23,9 +23,9 @@ namespace GWydiR
 
         string SID;
 
-        string Cert;
+        public string Cert { get; set; }
 
-        X509Certificate2 certificate;
+        public X509Certificate2 certificate { get; set; }
 
         public AuthorisationModel()
         {
@@ -73,11 +73,11 @@ namespace GWydiR
         }
 
         /// <summary>
-        /// This method should deal with navgating forward from the Authentication tab
+        /// This method should deal with navigating forward from the Authentication tab
         /// This should involve, generating a give certificate if it didn't previously exists, 
         /// getting access to the certificate object if it did. Saving a .cer file of the
         /// certificate on the desktop if it is newly created, providing instructions for uploading.
-        /// Setting updata for configure ation stepand destoying unused data from authentication.
+        /// Setting updata for configure ation step and destoying unused data from authentication.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -85,29 +85,39 @@ namespace GWydiR
         {
             SID = authorisationView.GetSelectedSubscription();
             Cert = authorisationView.GetSelectedCertificate();
-            // if there is a refference t0 the wizard
-            if (wizard != null)
+            if (wizard.HasSubscription(SID, Cert))
             {
-                if (wizard.HasSubscription(SID, Cert))
+                CertificateManager certManager = makeCertificateManager();
+                //get the thumb print
+                string thumbprint = wizard.GetThumbPrint(SID, Cert);
+                //if the valid subscription's certificate exists, load it from the local store
+                if (certManager.CertificateExistsLocally(thumbprint))
                 {
-                    CertificateManager certManager = new CertificateManager();
-                    //get the thumb print
-                    List<Subscription> subscriptions = wizard.GetSubscriptions();
-                    string thumbprint = wizard.GetThumbPrint(SID, Cert);
-                    //if the valid subscription's certificate exists, load it from the local store
-                    if (certManager.CertificateExistsLocally(thumbprint))
-                    {
-                        certificate = certManager.GetLocalCertificate(thumbprint);
-                    }
-                    else //if not then tell the user there has been an error
-                    // will also need to deal with this (make new certificate if user agrees etc)
-                    {
-                        ((IViewError)authorisationView).NotifyOfError(new Exception("Certificate does not exist Locally"));
-                    }
-
+                    certificate = certManager.GetLocalCertificate(thumbprint);
                 }
-                wizard.AddSubscription(SID, Cert, certificate.Thumbprint);
+                else //if not then tell the user there has been an error
+                // will also need to deal with this (make new certificate if user agrees etc)
+                {
+                    (castToIViewError(authorisationView)).NotifyOfError(new Exception("Certificate does not exist Locally"));
+                }
+
             }
+            wizard.AddSubscription(SID, Cert, certificate.Thumbprint);
+        }
+
+        /// <summary>
+        /// This method exists to allow injection of sata during testing
+        /// </summary>
+        /// <param name="authorisationView"></param>
+        /// <returns></returns>
+        protected virtual IViewError castToIViewError(IAuthorisationView authorisationView)
+        {
+            return (IViewError)authorisationView;
+        }
+
+        protected virtual CertificateManager makeCertificateManager()
+        {
+            return new CertificateManager();
         }
 
         /// <summary>
@@ -124,7 +134,7 @@ namespace GWydiR
             }
             catch (InvalidSIDException exc)
             {
-                ((IViewError)authorisationView).NotifyOfError(exc);
+                (castToIViewError(authorisationView)).NotifyOfError(exc);
             }
         }
 

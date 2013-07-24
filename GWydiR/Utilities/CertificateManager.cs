@@ -20,7 +20,7 @@ namespace GWydiR.Utilities
         /// </summary>
         /// <param name="testThumbPrint"></param>
         /// <returns></returns>
-        public bool CertificateExistsLocally(string testThumbPrint)
+        public virtual bool CertificateExistsLocally(string testThumbPrint)
         {
             //open store
             //should use a wrapper class as the store object is sealed.
@@ -71,7 +71,7 @@ namespace GWydiR.Utilities
             store.Add(testCert);
         }
 
-        public X509Certificate2 GetLocalCertificate(string ThumbPrint)
+        public virtual X509Certificate2 GetLocalCertificate(string ThumbPrint)
         {
             X509Certificate2 returnCert = null;
             CertificateStore store = makeStore();
