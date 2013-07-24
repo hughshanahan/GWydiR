@@ -28,13 +28,18 @@ namespace WindowsFormsApplication1
         /// <summary>
         /// A method to be called when a new item is selected in the SID list
         /// </summary>
-        public event GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler ChangeSelectedSID;
+        public event GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler ChangeSelectedSID;
 
-
+        /// <summary>
+        /// A method to be called when a new item is selected from the cert list
+        /// </summary>
+        public event GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler ChangedSelectCert;
 
         public GWydiRWizardUI()
         {
             InitializeComponent();
+            CreateSubscriptionBtn.Enabled = false;
+            NavigateNextBtn.Enabled = false;
         }
 
         public void  DisplaySubsriptions(List<string> subscriptions)
@@ -142,16 +147,61 @@ namespace WindowsFormsApplication1
             }
         }
 
-
-
-        public void RegisterChangedSIDSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler handler)
+        public void RegisterChangedSIDSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler handler)
         {
             ChangeSelectedSID += handler;
         }
 
-        public void DeRegisterChangedSIDSelected(GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler handler)
+        public void DeRegisterChangedSIDSelected(GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler handler)
         {
             ChangeSelectedSID -= handler;
+        }
+
+
+        public void EnableNext()
+        {
+            NavigateNextBtn.Enabled = true;
+        }
+
+        public void DisableNext()
+        {
+            NavigateNextBtn.Enabled = false;
+        }
+
+        public void EnableCreate()
+        {
+            CreateSubscriptionBtn.Enabled = true;
+        }
+
+        public void DisableCreate()
+        {
+            CreateSubscriptionBtn.Enabled = false;
+        }
+
+        public void RegisterChangedCertificateSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler handler)
+        {
+            ChangedSelectCert += handler;
+        }
+
+        public void DeRegisterChangedCertificateSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler handler)
+        {
+            ChangedSelectCert -= handler;
+        }
+
+        public void RegisterCreate(EventHandler handler)
+        {
+            CreateSubscriptionBtn.Click += handler;
+        }
+
+        public void DeRegisterCreate(EventHandler handler)
+        {
+            CreateSubscriptionBtn.Click -= handler;
+        }
+
+        private void CertComboBx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ChangedSelectCert != null)
+                ChangedSelectCert(CertComboBx.SelectedIndex);
         }
     }
 }

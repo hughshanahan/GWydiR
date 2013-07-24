@@ -19,5 +19,6 @@ namespace GWydiR.Interfaces.ModelInterfaces
          void AddSubscription(string SID, string certificateName, string certificateThumbPrint);
          List<Subscription> GetSubscriptions();
          bool HasSubscription(string SID, string certificateName);
+         string GetThumbPrint(string SID, string certificateName);
     }
 }

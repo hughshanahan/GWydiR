@@ -31,6 +31,26 @@ namespace GWydiR.Interfaces.ViewInterfaces
         string GetSelectedCertificate();
 
         /// <summary>
+        /// Method to allow a user to interact with a button
+        /// </summary>
+        void EnableNext();
+
+        /// <summary>
+        /// method to prevent a user interating with a button
+        /// </summary>
+        void DisableNext();
+
+        /// <summary>
+        /// method to allow a user to interact with a button
+        /// </summary>
+        void EnableCreate();
+
+        /// <summary>
+        /// method to rpevent a user interacting with a button
+        /// </summary>
+        void DisableCreate();
+
+        /// <summary>
         /// method to register an event handling delegate with a new subscritions event
         /// </summary>
         /// <param name="handler"></param>
@@ -58,13 +78,39 @@ namespace GWydiR.Interfaces.ViewInterfaces
         /// Method to add delegate to respond to change in selected SID event
         /// </summary>
         /// <param name="handler"></param>
-        void RegisterChangedSIDSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler handler);
+        void RegisterChangedSIDSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler handler);
 
         /// <summary>
         /// Method to remove delegate that responds to changed selected SID event
         /// </summary>
         /// <param name="handler"></param>
-        void DeRegisterChangedSIDSelected(GWydiR.Handlers.GWydiRHandlers.ChangedSeelctionHandler handler);
+        void DeRegisterChangedSIDSelected(GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler handler);
+
+        /// <summary>
+        /// Method to add delegate
+        /// </summary>
+        /// <param name="handler"></param>
+        void RegisterChangedCertificateSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler handler);
+
+        /// <summary>
+        /// method to remove delegate
+        /// </summary>
+        /// <param name="handler"></param>
+        void DeRegisterChangedCertificateSelection(GWydiR.Handlers.GWydiRHandlers.ChangedSelectionHandler handler);
+
+        /// <summary>
+        /// Method to add delegate that responds to changes to the selection made by  user
+        /// of the Certificat combo box
+        /// </summary>
+        /// <param name="handler"></param>
+        void RegisterCreate(EventHandler handler);
+
+        /// <summary>
+        /// Method to remove delegates that respond to changes to the selected value in the
+        /// certificate combo box
+        /// </summary>
+        /// <param name="handler"></param>
+        void DeRegisterCreate(EventHandler handler);
 
     }
 }

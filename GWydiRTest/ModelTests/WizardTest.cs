@@ -387,5 +387,23 @@ namespace GWydiR.Test
             Assert.IsTrue(wizard.GetSubscriptions().Count == 1);
         }
 
+        [Test]
+        public void GetThumbPrintTest()
+        {
+            //Arrange
+            string testSID = "anSID";
+            string testCertName = "aCertname";
+            string testCertPrint = "aprint";
+
+            wizard.AddSubscription(testSID, testCertName, testCertPrint);
+
+            //Act
+            string output = wizard.GetThumbPrint(testSID,testCertName);
+
+            //Assert
+            Assert.IsTrue(output == testCertPrint);
+        }
+
+
     }
 }

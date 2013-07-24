@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWydiR.exe" size="26624">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWydiR.exe" size="27648">
       <assemblyIdentity name="GWydiR" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>soYskV6+qxR5xkuDCviBRBUQR5c=</dsig:DigestValue>
+        <dsig:DigestValue>l9JkVNPD9//zHfrESL/XIcAkcm8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -97,6 +97,11 @@ namespace GWydiR
             return new FileWriter();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SID"></param>
+        /// <returns></returns>
         public bool hasSID(string SID)
         {
             //check it exists in the list
@@ -194,6 +199,19 @@ namespace GWydiR
             }
 
             return returnValue;
+        }
+
+        public string GetThumbPrint(string SID, string Cert)
+        {
+            string returnString = "";
+            foreach (Subscription subscription in SubscriptionsList)
+            {
+                if (subscription.SID == SID && subscription.CertName == Cert)
+                {
+                    returnString = subscription.ThumbPrint;
+                }
+            }
+            return returnString;
         }
     }
 }

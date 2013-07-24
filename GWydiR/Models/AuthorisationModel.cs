@@ -25,6 +25,8 @@ namespace GWydiR
 
         string Cert;
 
+        X509Certificate2 certificate;
+
         public AuthorisationModel()
         {
         }
@@ -48,6 +50,10 @@ namespace GWydiR
             authorisationView.RegisterNewCertificate(NewCertificateHandler);
             //register new changed SID selection handler
             authorisationView.RegisterChangedSIDSelection(ChangedSIDSelectionHandler);
+            //register for changes to selection of the certificates on the ui.
+            authorisationView.RegisterChangedCertificateSelection(ChangedCertificateSelectionHandler);
+            //register for create button click
+            authorisationView.RegisterCreate(CreateButtonHandler);
 
             ITabNavigation genericPanel = CastITabNavigation(authorisationView);
             genericPanel.RegisterNext(NextHandler);
@@ -82,59 +88,38 @@ namespace GWydiR
             // if there is a refference t0 the wizard
             if (wizard != null)
             {
-                //this method will write certificate data and SID's into
-                //the subscriptions file.
-                //before this we need to generate the certificate object.
-                //save it locally
-                //provide access to a .cer file on the desktop
-                SID = authorisationView.GetSelectedSubscription();
-                Cert = authorisationView.GetSelectedCertificate();
-                
-                //needs moving out of this class i think
-                CertificateManager certManager = new CertificateManager();
-                CertificateMaker certMaker = new CertificateMaker();
-                X509Certificate2 certificate = new X509Certificate2();
-                // if the subscription already exists
                 if (wizard.HasSubscription(SID, Cert))
                 {
+                    CertificateManager certManager = new CertificateManager();
                     //get the thumb print
                     List<Subscription> subscriptions = wizard.GetSubscriptions();
-                    string thumbprint = GetThumbPrint(SID, Cert, subscriptions);
+                    string thumbprint = wizard.GetThumbPrint(SID, Cert);
+                    //if the valid subscription's certificate exists, load it from the local store
                     if (certManager.CertificateExistsLocally(thumbprint))
+                    {
                         certificate = certManager.GetLocalCertificate(thumbprint);
-                }
-                else
-                {
-                    certificate = certMaker.MakeCertificate(Cert, certificate);
-                    // indicate certificate is being made to user
-                }
+                    }
+                    else //if not then tell the user there has been an error
+                    // will also need to deal with this (make new certificate if user agrees etc)
+                    {
+                        ((IViewError)authorisationView).NotifyOfError(new Exception("Certificate does not exist Locally"));
+                    }
 
+                }
                 wizard.AddSubscription(SID, Cert, certificate.Thumbprint);
-
-                ((IViewError)authorisationView).NotifyOfError(new Exception(certificate.Thumbprint));
             }
-            // need to deal with certificates aswell;
         }
 
-        // not the responcibility of this class, should be moved somewhere that deals with subscriptions
-        private string GetThumbPrint(string SID, string Cert, List<Subscription> subscriptions)
-        {
-            string returnString = "";
-            foreach (Subscription subscription in subscriptions)
-            {
-                if (subscription.SID == SID && subscription.CertName == Cert)
-                {
-                    returnString = subscription.ThumbPrint;
-                }
-            }
-            return returnString;
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         public void NewSubscriptionHandler(object data)
         {
             try
             {
                 wizard.addSID((string)data);
+                SID = (string)data;
                 authorisationView.DisplaySubsriptions(wizard.GetSIDList());
             }
             catch (InvalidSIDException exc)
@@ -143,9 +128,14 @@ namespace GWydiR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         public void NewCertificateHandler(object data)
         {
             wizard.AddCertificate((String)data);
+            Cert = (string)data;
             authorisationView.DisplayCertificates(wizard.GetCertList());
         }
 
@@ -157,11 +147,72 @@ namespace GWydiR
         /// <returns></returns>
         public int ChangedSIDSelectionHandler(int index)
         {
+            //set selected value in model
+            SID = wizard.GetSIDList()[index];
+
             int returnIndex = -1;
             if ((index  < wizard.GetSubscriptions().Count))
                 returnIndex = index;
             return returnIndex;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public int ChangedCertificateSelectionHandler(int index)
+        {
+            //set selected value in model
+            Cert = wizard.GetCertList()[index];
+
+            //if the current SID and cert selected are a valid subscription
+            if (wizard.HasSubscription(SID, Cert))
+            {
+                authorisationView.EnableNext();
+                authorisationView.DisableCreate();
+            }
+            else if (SID != null)
+            {
+                authorisationView.EnableCreate();
+                authorisationView.DisableNext();
+            }
+            else
+            {
+                authorisationView.DisableCreate();
+                authorisationView.DisableNext();
+            }
+
+
+            return 0;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        public void CreateButtonHandler(object Sender, EventArgs e)
+        {
+            //this method will write certificate data and SID's into
+            //the subscriptions file.
+            //before this we need to generate the certificate object.
+            //save it locally
+            //provide access to a .cer file on the desktop
+            SID = authorisationView.GetSelectedSubscription();
+            Cert = authorisationView.GetSelectedCertificate();
+
+            CertificateMaker certMaker = new CertificateMaker();
+            certificate = new X509Certificate2();
+            // if the subscription already exists
+            
+            certificate = certMaker.MakeCertificate(Cert, certificate);
+            // indicate certificate is being made to user
+
+            authorisationView.DisableCreate();
+            authorisationView.EnableNext();           
+        }
+
+
 
     }
 }

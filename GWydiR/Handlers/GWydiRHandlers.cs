@@ -8,6 +8,6 @@ namespace GWydiR.Handlers
     public static class GWydiRHandlers
     {
         public delegate void NewDataEventHandler(object data);
-        public delegate int ChangedSeelctionHandler(int index);
+        public delegate int ChangedSelectionHandler(int index);
     }
 }

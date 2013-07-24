@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GWydiRWizardUI));
             this.WizardTabPanel = new System.Windows.Forms.TabControl();
             this.AuthorisationTab = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CreateSubscriptionBtn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.AddNewCertBtn = new System.Windows.Forms.Button();
@@ -46,6 +49,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.WizardTabPanel.SuspendLayout();
             this.AuthorisationTab.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CertificatePictureBx)).BeginInit();
             this.panel2.SuspendLayout();
@@ -67,6 +71,7 @@
             // 
             // AuthorisationTab
             // 
+            this.AuthorisationTab.Controls.Add(this.panel4);
             this.AuthorisationTab.Controls.Add(this.panel3);
             this.AuthorisationTab.Controls.Add(this.panel2);
             this.AuthorisationTab.Controls.Add(this.panel1);
@@ -77,6 +82,33 @@
             this.AuthorisationTab.TabIndex = 0;
             this.AuthorisationTab.Text = "Authorisation";
             this.AuthorisationTab.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.CreateSubscriptionBtn);
+            this.panel4.Location = new System.Drawing.Point(9, 366);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(595, 30);
+            this.panel4.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(364, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(147, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Create The new Subscription:";
+            // 
+            // CreateSubscriptionBtn
+            // 
+            this.CreateSubscriptionBtn.Location = new System.Drawing.Point(517, 3);
+            this.CreateSubscriptionBtn.Name = "CreateSubscriptionBtn";
+            this.CreateSubscriptionBtn.Size = new System.Drawing.Size(75, 23);
+            this.CreateSubscriptionBtn.TabIndex = 0;
+            this.CreateSubscriptionBtn.Text = "Create";
+            this.CreateSubscriptionBtn.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
@@ -92,7 +124,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(283, 153);
+            this.label2.Location = new System.Drawing.Point(263, 153);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 6;
@@ -100,9 +132,9 @@
             // 
             // AddNewCertBtn
             // 
-            this.AddNewCertBtn.Location = new System.Drawing.Point(536, 149);
+            this.AddNewCertBtn.Location = new System.Drawing.Point(516, 149);
             this.AddNewCertBtn.Name = "AddNewCertBtn";
-            this.AddNewCertBtn.Size = new System.Drawing.Size(48, 21);
+            this.AddNewCertBtn.Size = new System.Drawing.Size(75, 21);
             this.AddNewCertBtn.TabIndex = 3;
             this.AddNewCertBtn.Text = "New";
             this.AddNewCertBtn.UseVisualStyleBackColor = true;
@@ -112,10 +144,11 @@
             // 
             this.CertComboBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CertComboBx.FormattingEnabled = true;
-            this.CertComboBx.Location = new System.Drawing.Point(343, 149);
+            this.CertComboBx.Location = new System.Drawing.Point(323, 149);
             this.CertComboBx.Name = "CertComboBx";
             this.CertComboBx.Size = new System.Drawing.Size(187, 21);
             this.CertComboBx.TabIndex = 1;
+            this.CertComboBx.SelectedIndexChanged += new System.EventHandler(this.CertComboBx_SelectedIndexChanged);
             // 
             // CertificatePictureBx
             // 
@@ -141,7 +174,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(163, 141);
+            this.label1.Location = new System.Drawing.Point(143, 141);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 5;
@@ -149,9 +182,9 @@
             // 
             // AddNewSIDBtn
             // 
-            this.AddNewSIDBtn.Location = new System.Drawing.Point(536, 137);
+            this.AddNewSIDBtn.Location = new System.Drawing.Point(516, 137);
             this.AddNewSIDBtn.Name = "AddNewSIDBtn";
-            this.AddNewSIDBtn.Size = new System.Drawing.Size(48, 21);
+            this.AddNewSIDBtn.Size = new System.Drawing.Size(75, 21);
             this.AddNewSIDBtn.TabIndex = 2;
             this.AddNewSIDBtn.Text = "New";
             this.AddNewSIDBtn.UseVisualStyleBackColor = true;
@@ -161,7 +194,7 @@
             // 
             this.SIDComboBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SIDComboBx.FormattingEnabled = true;
-            this.SIDComboBx.Location = new System.Drawing.Point(248, 137);
+            this.SIDComboBx.Location = new System.Drawing.Point(228, 137);
             this.SIDComboBx.Name = "SIDComboBx";
             this.SIDComboBx.Size = new System.Drawing.Size(282, 21);
             this.SIDComboBx.TabIndex = 0;
@@ -180,14 +213,14 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.NavigateNextBtn);
-            this.panel1.Location = new System.Drawing.Point(9, 348);
+            this.panel1.Location = new System.Drawing.Point(9, 413);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(595, 95);
+            this.panel1.Size = new System.Drawing.Size(595, 30);
             this.panel1.TabIndex = 4;
             // 
             // NavigateNextBtn
             // 
-            this.NavigateNextBtn.Location = new System.Drawing.Point(509, 35);
+            this.NavigateNextBtn.Location = new System.Drawing.Point(517, 3);
             this.NavigateNextBtn.Name = "NavigateNextBtn";
             this.NavigateNextBtn.Size = new System.Drawing.Size(75, 23);
             this.NavigateNextBtn.TabIndex = 0;
@@ -215,6 +248,8 @@
             this.Text = "GWydiR";
             this.WizardTabPanel.ResumeLayout(false);
             this.AuthorisationTab.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CertificatePictureBx)).EndInit();
@@ -243,6 +278,9 @@
         private System.Windows.Forms.PictureBox SubscriptionPictureBx;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button CreateSubscriptionBtn;
     }
 }
 
