@@ -121,6 +121,7 @@
     <Compile Include="Interfaces\ModelInterfaces\IWizard.cs" />
     <Compile Include="Interfaces\UtilityInterfaces\ICertificateMaker.cs" />
     <Compile Include="Interfaces\UtilityInterfaces\ICertificateManager.cs" />
+    <Compile Include="Interfaces\ViewInterfaces\IConfiguration.cs" />
     <Compile Include="Interfaces\ViewInterfaces\IViewError.cs" />
     <Compile Include="Models\AuthorisationModel.cs" />
     <Compile Include="Utilities\CertificateMaker.cs" />

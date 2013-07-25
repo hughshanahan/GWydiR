@@ -44,5 +44,13 @@ namespace GWydiR
             writer.WriteLine(data);
             writer.Close();
         }
+
+        public virtual void Write(string filePath, byte[] data)
+        {
+            FileStream writer = makeFile(filePath);
+            int count = data.Count();
+            writer.Write(data, 0, count);
+            writer.Close();
+        }
     }
 }

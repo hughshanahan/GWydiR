@@ -21,7 +21,7 @@ namespace GWydiR
 
         IWizard wizard;
 
-        string SID;
+        public string SID { get; set; }
 
         public string Cert { get; set; }
 
@@ -182,12 +182,12 @@ namespace GWydiR
                 authorisationView.EnableNext();
                 authorisationView.DisableCreate();
             }
-            else if (SID != null)
+            else if (SID != null) // if there is an valid SID that isn't part of a subscription
             {
                 authorisationView.EnableCreate();
                 authorisationView.DisableNext();
             }
-            else
+            else // else nothing can be created and we can't move forward so prevent it from occuring
             {
                 authorisationView.DisableCreate();
                 authorisationView.DisableNext();
@@ -208,18 +208,37 @@ namespace GWydiR
             //before this we need to generate the certificate object.
             //save it locally
             //provide access to a .cer file on the desktop
-            SID = authorisationView.GetSelectedSubscription();
-            Cert = authorisationView.GetSelectedCertificate();
 
-            CertificateMaker certMaker = new CertificateMaker();
+            CertificateMaker certMaker = makeCertificateMaker();
             certificate = new X509Certificate2();
             // if the subscription already exists
             
             certificate = certMaker.MakeCertificate(Cert, certificate);
+
+            //Write Certificate as file to desktop
+            FileWriter writer = makeFileWriter();
+            writer.Write(makeCertificatePath(), certificate.GetRawCertData());
             // indicate certificate is being made to user
 
             authorisationView.DisableCreate();
             authorisationView.EnableNext();           
+
+        }
+
+        private string makeCertificatePath()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            return path + "\\" + Cert + ".cer";
+        }
+
+        protected virtual CertificateMaker makeCertificateMaker()
+        {
+            return new CertificateMaker();
+        }
+
+        protected virtual FileWriter makeFileWriter()
+        {
+            return new FileWriter();
         }
 
 

@@ -25,7 +25,7 @@ namespace GWydiR.Utilities
         /// <param name="principalName"></param>
         /// <param name="rsaKeyPair"></param>
         /// <returns></returns>
-        public X509Certificate2 MakeCertificate(string principalName, X509Certificate2 cert)
+        public virtual X509Certificate2 MakeCertificate(string principalName, X509Certificate2 cert)
         {
             //build a key generator
             RsaKeyPairGenerator keyGen = makeRsaGenerator();

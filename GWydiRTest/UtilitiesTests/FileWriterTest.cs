@@ -89,12 +89,37 @@ namespace GWydiRTest
         [Test]
         public void createFileTest()
         {
+            //Arrange
             FileStream stubFile = MockRepository.GenerateStub<FileStream>();
             fileWriter = new OverRiddenWriter_2(stubFile);
             string testPath = "\\this\\is\\not\\a\\path.dat";
+
+            //Act
             fileWriter.Create(testPath);
+
+            //Assert
             bool passed = ((OverRiddenWriter_2)fileWriter).wasCalled();
             Assert.IsTrue(passed);
+        }
+
+        [Test]
+        public void WriteFileFromBytesTest()
+        {
+            //Arrange
+            FileStream stubFile = MockRepository.GenerateMock<FileStream>();
+            stubFile.Expect(x => x.Write(Arg<byte[]>.Is.Anything, Arg<int>.Is.Anything, Arg<int>.Is.Equal(1)));
+            stubFile.Expect(x => x.Close());
+
+            fileWriter = new OverRiddenWriter_2(stubFile);
+
+            string testPath ="\\this\\is\\a\\path\\not.dat";
+            byte[] aByteArrray = new byte[1];
+
+            //Act
+            fileWriter.Write(testPath,aByteArrray);
+
+            //Assert
+            stubFile.VerifyAllExpectations();
         }
 
     }
