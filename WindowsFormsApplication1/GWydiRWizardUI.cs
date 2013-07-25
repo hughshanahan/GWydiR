@@ -58,12 +58,12 @@ namespace WindowsFormsApplication1
 
         public string  GetSelectedSubscription()
         {
-            return SIDComboBx.SelectedText;
+            return (string)SIDComboBx.SelectedValue;
         }
 
         public string  GetSelectedCertificate()
         {
-            return CertComboBx.SelectedText;
+            return (string)CertComboBx.SelectedValue;
         }
 
         public void RegisterNext(EventHandler nextHandler)
@@ -140,7 +140,7 @@ namespace WindowsFormsApplication1
             if (ChangeSelectedSID != null)
                 index = ChangeSelectedSID(SIDComboBx.SelectedIndex);
 
-            if (index > -1)
+            if (index > -1 && CertComboBx.DataSource != null)
             {
                 CertComboBx.SelectedIndex = index;
                 CertComboBx.Text = ((List<string>)CertComboBx.DataSource)[index];

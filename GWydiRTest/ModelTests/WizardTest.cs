@@ -260,9 +260,15 @@ namespace GWydiR.Test
         class OverRiddenWizard_2 : Wizard
         {
 
+            private FileWriter mockWriter;
+
             public OverRiddenWizard_2()
             {
                 
+            }
+            public OverRiddenWizard_2(FileWriter mockWriter)
+            {
+                this.mockWriter = mockWriter;
             }
 
             protected override SubscriptionFileParser makeSubscriptionsParser()
@@ -273,6 +279,12 @@ namespace GWydiR.Test
                 mockParser.Stub(x => x.ParseSids(Arg<List<Subscription>>.Is.Anything)).Return(new List<string>());
                 return mockParser;
             }
+
+            public override FileWriter makeWriter()
+            {
+                return mockWriter;
+            }
+
             
         }
 
@@ -402,6 +414,22 @@ namespace GWydiR.Test
 
             //Assert
             Assert.IsTrue(output == testCertPrint);
+        }
+
+        [Test]
+        public void SaveSubscriptionsTest()
+        {
+            //Arrange
+            FileWriter mockWriter = MockRepository.GenerateMock<FileWriter>();
+            mockWriter.Expect(x => x.Write(Arg<string>.Is.Anything, Arg<List<string>>.Is.Anything));
+
+            wizard = new OverRiddenWizard_2(mockWriter);
+
+            //Act
+            wizard.SaveSubscriptions();
+
+            //Assert
+            mockWriter.VerifyAllExpectations();
         }
 
 

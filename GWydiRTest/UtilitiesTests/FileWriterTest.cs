@@ -32,6 +32,11 @@ namespace GWydiRTest
             {
                 return (StreamWriter) mockObject;
             }
+
+            protected override StreamWriter makeStream(string filePath, FileMode mode)
+            {
+                return (StreamWriter)mockObject;
+            }
         }
 
         /// <summary>
@@ -41,7 +46,7 @@ namespace GWydiRTest
         public void writeListToFileTest()
         {
             StreamWriter stubWriter = MockRepository.GenerateStub<StreamWriter>();
-            stubWriter.Stub(x => x.Write(Arg<string>.Is.Anything));
+            stubWriter.Stub(x => x.Write(Arg<string>.Is.Anything,Arg<FileMode>.Is.Anything));
             fileWriter = new OverRiddenWriter_1(stubWriter);
             List<string> testData = new List<string>() { "111111-1111-1111-1111-111111111111", "222222-2222-2222-2222-22222222222" };
             string testPath = "\\not\\a\\file\\path.txt";

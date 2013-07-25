@@ -101,6 +101,7 @@ namespace GWydiRTest.ModelTests
             IWizard mockWizard = MockRepository.GenerateMock<IWizard>();
             mockWizard.Expect(x => x.AddSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything, Arg<string>.Is.Anything));
             mockWizard.Expect(x => x.HasSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(false);
+            mockWizard.Stub(x => x.SaveSubscriptions());
 
             X509Certificate2 mockCertificate = MockRepository.GenerateStub<X509Certificate2>();
             mockCertificate.Stub(x => x.Thumbprint).Return(string.Empty);
@@ -129,7 +130,6 @@ namespace GWydiRTest.ModelTests
             mockErrorView.Expect(x => x.NotifyOfError(Arg<Exception>.Is.Anything));
 
             IWizard mockWizard = MockRepository.GenerateMock<IWizard>();
-            mockWizard.Expect(x => x.AddSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything, Arg<string>.Is.Anything));
             mockWizard.Expect(x => x.HasSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(true);
             mockWizard.Expect(x => x.GetThumbPrint(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(String.Empty);
 
@@ -162,9 +162,9 @@ namespace GWydiRTest.ModelTests
             mockView.Expect(x => x.GetSelectedCertificate()).Return(string.Empty);
 
             IWizard mockWizard = MockRepository.GenerateMock<IWizard>();
-            mockWizard.Expect(x => x.AddSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything, Arg<string>.Is.Anything));
             mockWizard.Expect(x => x.HasSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(true);
             mockWizard.Expect(x => x.GetThumbPrint(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(String.Empty);
+
 
             X509Certificate2 mockCertificate = MockRepository.GenerateStub<X509Certificate2>();
             mockCertificate.Stub(x => x.Thumbprint).Return(string.Empty);
@@ -373,8 +373,6 @@ namespace GWydiRTest.ModelTests
             mockWriter.Expect(x => x.Write(Arg<string>.Is.Anything, Arg<byte[]>.Is.Anything));
 
             IAuthorisationView mockView = MockRepository.GenerateMock<IAuthorisationView>();
-            mockView.Expect(x => x.GetSelectedSubscription()).Return(string.Empty);
-            mockView.Expect(x => x.GetSelectedCertificate()).Return(string.Empty);
             mockView.Expect(x => x.DisableCreate());
             mockView.Expect(x => x.EnableNext());
 

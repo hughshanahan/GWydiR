@@ -146,6 +146,10 @@ namespace GWydiR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="certName"></param>
         public void AddCertificate(string certName)
         {
             //if certificate exists, don't add it
@@ -153,6 +157,11 @@ namespace GWydiR
                 CertList.Add(certName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="testName1"></param>
+        /// <returns></returns>
         public bool HasCert(string testName1)
         {
             bool returnValue = false;
@@ -183,11 +192,21 @@ namespace GWydiR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Subscription> GetSubscriptions()
         {
             return SubscriptionsList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="testSID"></param>
+        /// <param name="testCertName"></param>
+        /// <returns></returns>
         public bool HasSubscription(string testSID, string testCertName)
         {
             bool returnValue = false;
@@ -201,6 +220,12 @@ namespace GWydiR
             return returnValue;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SID"></param>
+        /// <param name="Cert"></param>
+        /// <returns></returns>
         public string GetThumbPrint(string SID, string Cert)
         {
             string returnString = "";
@@ -212,6 +237,20 @@ namespace GWydiR
                 }
             }
             return returnString;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SaveSubscriptions()
+        {
+            FileWriter writer = makeWriter();
+            List<string> subscriptions = new List<string>();
+            foreach(Subscription s in SubscriptionsList)
+            {
+                subscriptions.Add(s.SID + "," + s.CertName + "," + s.ThumbPrint);
+            }
+            writer.Write(SubscriptionsFileName, subscriptions);
         }
     }
 }

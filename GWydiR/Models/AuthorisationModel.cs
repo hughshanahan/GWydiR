@@ -102,7 +102,18 @@ namespace GWydiR
                 }
 
             }
-            wizard.AddSubscription(SID, Cert, certificate.Thumbprint);
+            else
+            {
+                try
+                {
+                    wizard.AddSubscription(SID, Cert, certificate.Thumbprint);
+                    wizard.SaveSubscriptions();
+                }
+                catch (NullReferenceException exc)
+                {
+                    // what should I do with a null refference?
+                }
+            }
         }
 
         /// <summary>

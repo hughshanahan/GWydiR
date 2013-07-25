@@ -32,6 +32,8 @@ namespace GWydiR
             //remove null refferences
             if (returnData.Contains(string.Empty))
                 returnData.Remove(string.Empty);
+            if (returnData.Contains("\n"))
+                returnData.Remove("\n");
 
             return returnData;
         }

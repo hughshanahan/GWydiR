@@ -20,6 +20,11 @@ namespace GWydiR
             return new StreamWriter(File.Open(filePath, FileMode.Append));
         }
 
+        protected virtual StreamWriter makeStream(string filePath,FileMode mode)
+        {
+           return new StreamWriter(File.Open(filePath, mode));
+        }
+
         protected virtual FileStream makeFile(string filePath)
         {
             return new FileStream(filePath,FileMode.Create);
@@ -33,7 +38,7 @@ namespace GWydiR
 
         public virtual void Write(string filePath,List<string> testData)
         {
-            StreamWriter writer = makeStream(filePath);
+            StreamWriter writer = makeStream(filePath,FileMode.Create);
             testData.ForEach(x => writer.WriteLine(x));
             writer.Close();
         }
