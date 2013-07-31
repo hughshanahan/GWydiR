@@ -12,7 +12,7 @@ using GWydiR.Interfaces.ViewInterfaces;
 
 namespace WindowsFormsApplication1
 {
-    public partial class GWydiRWizardUI : Form, IAuthorisationView, ITabNavigation, IViewError
+    public partial class GWydiRWizardUI : Form, IAuthorisationView, ITabNavigation, IViewError, IConfigurationView
     {
 
         /// <summary>
@@ -42,49 +42,84 @@ namespace WindowsFormsApplication1
             NavigateNextBtn.Enabled = false;
         }
 
-        public void  DisplaySubsriptions(List<string> subscriptions)
+        public void DisplaySubsriptions(List<string> subscriptions)
         {
             SIDComboBx.DataSource = null;
             SIDComboBx.DataSource = subscriptions;
             SIDComboBx.SelectedIndex = subscriptions.Count - 1;
         }
 
-        public void  DisplayCertificates(List<string> certificates)
+        public void DisplayCertificates(List<string> certificates)
         {
             CertComboBx.DataSource = null;
             CertComboBx.DataSource = certificates;
             CertComboBx.SelectedIndex = certificates.Count - 1;
+
         }
 
-        public string  GetSelectedSubscription()
+        public string GetSelectedSubscription()
         {
             return (string)SIDComboBx.SelectedValue;
         }
 
-        public string  GetSelectedCertificate()
+        public string GetSelectedCertificate()
         {
             return (string)CertComboBx.SelectedValue;
         }
 
-        public void RegisterNext(EventHandler nextHandler)
+        public void RegisterNext(EventHandler nextHandler, int tab)
         {
-            NavigateNextBtn.Click += nextHandler;
+            switch(tab)
+            {
+                case 0:
+                    NavigateNextBtn.Click += nextHandler;
+                    break;
+
+                case 1:
+                    ConfigNextBtn.Click += nextHandler;
+                    break;
+            }
         }
 
-        public void RegisterPrevious(EventHandler PreviousHandler)
+        public void RegisterPrevious(EventHandler previousHandler, int tab)
         {
-            // No previous Button yet
+            switch (tab)
+            {
+                case 0:
+                    break;
+
+                case 1:
+                    ConfigPreviousBtn.Click += previousHandler;
+                    break;
+            }
         }
 
 
-        public void DeRegisterNext(EventHandler nextHandler)
+        public void DeRegisterNext(EventHandler nextHandler, int tab)
         {
-            NavigateNextBtn.Click -= nextHandler;
+            switch (tab)
+            {
+                case 0:
+                    NavigateNextBtn.Click -= nextHandler;
+                    break;
+
+                case 1:
+                    ConfigNextBtn.Click -= nextHandler;
+                    break;
+            }
         }
 
-        public void DeRegisterPrevious(EventHandler previousHandler)
+        public void DeRegisterPrevious(EventHandler previousHandler, int tab)
         {
-            // no previous button
+            switch (tab)
+            {
+                case 0:
+                    break;
+
+                case 1:
+                    ConfigPreviousBtn.Click -= previousHandler;
+                    break;
+            }
         }
 
 
@@ -103,7 +138,7 @@ namespace WindowsFormsApplication1
             // open new gui
             string newSID = Interaction.InputBox("Please enter a new Subscription ID", "New Subscription ID");
             // raise the event
-            if(NewSubscription != null)
+            if (NewSubscription != null)
                 NewSubscription(newSID);
         }
 
@@ -129,7 +164,7 @@ namespace WindowsFormsApplication1
             String newCertificate = Interaction.InputBox("Please eventer to whom the certificate is being issued", "Subject Name");
             // raise event if not empty
             if (NewCertificate != null)
-                NewCertificate(newCertificate);
+                NewCertificate(new[] {newCertificate,CertPasswordTxtbx.Text});
         }
 
         //This is a method that should throw an event to as to allow the mdoel to deal with it
@@ -203,5 +238,37 @@ namespace WindowsFormsApplication1
             if (ChangedSelectCert != null)
                 ChangedSelectCert(CertComboBx.SelectedIndex);
         }
+
+        public string GetCloudServiceName()
+        {
+            return CloudServiceNametxtbx.Text;
+        }
+
+        public string GetAppStoreName()
+        {
+            return AppStoreNameTxtbx.Text;
+        }
+
+        public string GetAppStoreKey()
+        {
+            return AppStoreKeyTxtbx.Text;
+        }
+
+        public string GetDataStoreName()
+        {
+            return DataStoreNameTxtbx.Text;
+        }
+
+        public string GetDataStoreKey()
+        {
+            return DataStoreKeyTxtBx.Text;
+        }
+
+
+        public void ChangeTab(int i)
+        {
+            WizardTabPanel.SelectedTab = WizardTabPanel.TabPages[i];
+        }
+
     }
 }

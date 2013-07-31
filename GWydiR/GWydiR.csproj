@@ -116,14 +116,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\PkcsCertificate.cs" />
     <Compile Include="Containers\Subscription.cs" />
     <Compile Include="Handlers\GWydiRHandlers.cs" />
     <Compile Include="Interfaces\ModelInterfaces\IWizard.cs" />
     <Compile Include="Interfaces\UtilityInterfaces\ICertificateMaker.cs" />
     <Compile Include="Interfaces\UtilityInterfaces\ICertificateManager.cs" />
-    <Compile Include="Interfaces\ViewInterfaces\IConfiguration.cs" />
+    <Compile Include="Interfaces\ViewInterfaces\IConfigurationView.cs" />
     <Compile Include="Interfaces\ViewInterfaces\IViewError.cs" />
     <Compile Include="Models\AuthorisationModel.cs" />
+    <Compile Include="Models\ConfigureationModel.cs" />
     <Compile Include="Utilities\CertificateMaker.cs" />
     <Compile Include="Utilities\CertificateManager.cs" />
     <Compile Include="Utilities\FileReader.cs" />

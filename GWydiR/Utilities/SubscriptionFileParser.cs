@@ -27,7 +27,8 @@ namespace GWydiR.Utilities
                     Subscription subscription = new Subscription();
                     subscription.SID = tokens[0];
                     subscription.CertName = tokens[1];
-                    subscription.ThumbPrint = tokens[2];
+                    subscription.STSThumbPrint = tokens[2];
+                    subscription.ManagementThumbprint = tokens[3];
                     returnList.Add(subscription);
                     
                 }

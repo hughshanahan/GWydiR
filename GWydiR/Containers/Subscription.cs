@@ -13,6 +13,7 @@ namespace GWydiR.Containers
     {
         public string SID { get; set; }
         public string CertName { get; set; }
-        public string ThumbPrint { get; set; }
+        public string STSThumbPrint { get; set; }
+        public string ManagementThumbprint { get; set; }
     }
 }

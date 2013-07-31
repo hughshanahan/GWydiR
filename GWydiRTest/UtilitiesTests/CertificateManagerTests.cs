@@ -73,7 +73,7 @@ namespace GWydiRTest.UtilitiesTests
                 this.mockStore = mockStore;
             }
 
-            protected override CertificateStore makeStore()
+            protected override CertificateStore makeCurrentUserStore()
             {
                 return mockStore;
             }

@@ -17,6 +17,8 @@ namespace GWydiR
     public class AuthorisationModel
     {
 
+        const int TabNumber = 0;
+
         IAuthorisationView authorisationView;
 
         IWizard wizard;
@@ -25,7 +27,10 @@ namespace GWydiR
 
         public string Cert { get; set; }
 
-        public X509Certificate2 certificate { get; set; }
+        public string Password { get; set; }
+
+        public X509Certificate2 certificateSTS { get; set; }
+        public X509Certificate2 certificateManagement { get; set; }
 
         public AuthorisationModel()
         {
@@ -36,7 +41,7 @@ namespace GWydiR
             this.authorisationView = authorisationView;
             // register eventhandlers with UI
             ITabNavigation genericTabPanel = CastITabNavigation(authorisationView);
-            genericTabPanel.RegisterNext(NextHandler);
+            genericTabPanel.RegisterNext(NextHandler,TabNumber);
         }
 
         public AuthorisationModel(IAuthorisationView authorisationView, IWizard wizard)
@@ -56,14 +61,18 @@ namespace GWydiR
             authorisationView.RegisterCreate(CreateButtonHandler);
 
             ITabNavigation genericPanel = CastITabNavigation(authorisationView);
-            genericPanel.RegisterNext(NextHandler);
+            genericPanel.RegisterNext(NextHandler,TabNumber);
 
             // set up display on the view if there are SID's to show
-            if (wizard.GetSIDList() != null)
+            if (wizard.GetSIDList() != null && wizard.GetCertList() != null)
+            {
                 authorisationView.DisplaySubsriptions(wizard.GetSIDList());
-            // set up display on the view if there are certificates to show
-            if (wizard.GetCertList() != null)
                 authorisationView.DisplayCertificates(wizard.GetCertList());
+                authorisationView.DisableCreate();
+                authorisationView.EnableNext();
+            }
+
+                
         }
 
         // similar to a factory method, this allows a mocked tabNavigationObject to be injected while testing.
@@ -89,11 +98,13 @@ namespace GWydiR
             {
                 CertificateManager certManager = makeCertificateManager();
                 //get the thumb print
-                string thumbprint = wizard.GetThumbPrint(SID, Cert);
+                string thumbprint = wizard.GetSTSThumbPrint(SID, Cert);
                 //if the valid subscription's certificate exists, load it from the local store
                 if (certManager.CertificateExistsLocally(thumbprint))
                 {
-                    certificate = certManager.GetLocalCertificate(thumbprint);
+                    certificateSTS = certManager.GetLocalCertificate(thumbprint);
+                    ITabNavigation navView = CastITabNavigation(authorisationView);
+                    navView.ChangeTab(1);
                 }
                 else //if not then tell the user there has been an error
                 // will also need to deal with this (make new certificate if user agrees etc)
@@ -106,7 +117,7 @@ namespace GWydiR
             {
                 try
                 {
-                    wizard.AddSubscription(SID, Cert, certificate.Thumbprint);
+                    wizard.AddSubscription(SID, Cert, certificateSTS.Thumbprint,certificateManagement.Thumbprint);
                     wizard.SaveSubscriptions();
                 }
                 catch (NullReferenceException exc)
@@ -155,8 +166,10 @@ namespace GWydiR
         /// <param name="data"></param>
         public void NewCertificateHandler(object data)
         {
-            wizard.AddCertificate((String)data);
-            Cert = (string)data;
+            string[] certData = (string[])data;
+            Cert = certData[0];
+            Password = certData[1];
+            wizard.AddCertificate(Cert);
             authorisationView.DisplayCertificates(wizard.GetCertList());
         }
 
@@ -221,14 +234,46 @@ namespace GWydiR
             //provide access to a .cer file on the desktop
 
             CertificateMaker certMaker = makeCertificateMaker();
-            certificate = new X509Certificate2();
+            certificateSTS = new X509Certificate2();
             // if the subscription already exists
             
-            certificate = certMaker.MakeCertificate(Cert, certificate);
-
             //Write Certificate as file to desktop
             FileWriter writer = makeFileWriter();
-            writer.Write(makeCertificatePath(), certificate.GetRawCertData());
+
+            //needs to be rethought out and re designed
+            #region certificate creation 
+
+            // make STS certificate, save and export private key
+            PkcsCertificate stsCert = certMaker.MakeCertificate(Cert, Password);
+            certificateSTS = stsCert.GetX509Certificate2(X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
+            // wrte sts certificate to desktop
+            writer.Write(makeCertificatePath(Cert + "STS", ".pfx"), stsCert.GetCertificateStream().ToArray());
+
+            PkcsCertificate managementCert = certMaker.MakeCertificate(Cert, Password);
+            certificateManagement = managementCert.GetX509Certificate2(X509KeyStorageFlags.DefaultKeySet);
+            writer.Write(makeCertificatePath(Cert + "Management", ".cer"), certificateManagement.GetRawCertData());
+            certificateManagement = managementCert.GetX509Certificate2(X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
+            
+
+            // store both private key certificates locally in both user and loca machine stores
+            // to thats general worker can have access to them
+            //X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+            //store.Open(OpenFlags.ReadOnly);
+            //store.Add(certificateSTS);
+            //store.Add(certificateManagement);
+            //store.Close();
+
+            //store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+            //store.Open(OpenFlags.ReadOnly);
+            //store.Add(certificateSTS);
+            //store.Add(certificateManagement);
+            //store.Close();
+
+            #endregion
+
+            // make management certificate save private key, export public cert
+
+            
             // indicate certificate is being made to user
 
             authorisationView.DisableCreate();
@@ -236,10 +281,10 @@ namespace GWydiR
 
         }
 
-        private string makeCertificatePath()
+        private string makeCertificatePath(string name,string extension)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            return path + "\\" + Cert + ".cer";
+            return path + "\\" + name + extension;
         }
 
         protected virtual CertificateMaker makeCertificateMaker()

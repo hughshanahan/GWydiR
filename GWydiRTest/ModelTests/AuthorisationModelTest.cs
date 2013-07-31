@@ -60,7 +60,7 @@ namespace GWydiRTest.ModelTests
             public override ITabNavigation CastITabNavigation(IAuthorisationView view)
             {
                 ITabNavigation mock = MockRepository.GenerateStub<ITabNavigation>();
-                mock.Stub(x => x.RegisterNext(Arg<EventHandler>.Is.Anything));
+                mock.Stub(x => x.RegisterNext(Arg<EventHandler>.Is.Anything,Arg<int>.Is.Anything));
                 return mock;
             }
 
@@ -99,7 +99,7 @@ namespace GWydiRTest.ModelTests
             mockView.Expect(x => x.GetSelectedCertificate()).Return(string.Empty);
 
             IWizard mockWizard = MockRepository.GenerateMock<IWizard>();
-            mockWizard.Expect(x => x.AddSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything, Arg<string>.Is.Anything));
+            mockWizard.Expect(x => x.AddSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything, Arg<string>.Is.Anything,Arg<string>.Is.Anything));
             mockWizard.Expect(x => x.HasSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(false);
             mockWizard.Stub(x => x.SaveSubscriptions());
 
@@ -107,7 +107,7 @@ namespace GWydiRTest.ModelTests
             mockCertificate.Stub(x => x.Thumbprint).Return(string.Empty);
 
             model = new OverRiddenAuthorisationModel_1(mockView,mockWizard);
-            model.certificate = mockCertificate;
+            model.certificateSTS = mockCertificate;
 
             //Act
             model.NextHandler(new object(), new EventArgs());
@@ -131,7 +131,7 @@ namespace GWydiRTest.ModelTests
 
             IWizard mockWizard = MockRepository.GenerateMock<IWizard>();
             mockWizard.Expect(x => x.HasSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(true);
-            mockWizard.Expect(x => x.GetThumbPrint(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(String.Empty);
+            mockWizard.Expect(x => x.GetSTSThumbPrint(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(String.Empty);
 
             CertificateManager mockManager = MockRepository.GenerateMock<CertificateManager>();
             mockManager.Expect(x => x.CertificateExistsLocally(Arg<string>.Is.Anything)).Return(false);
@@ -141,7 +141,7 @@ namespace GWydiRTest.ModelTests
 
             model = new OverRiddenAuthorisationModel_1(mockView,mockWizard,mockManager,mockErrorView);
 
-            model.certificate = mockCertificate;
+            model.certificateSTS = mockCertificate;
 
             //Act
             model.NextHandler(new object(), new EventArgs());
@@ -163,7 +163,7 @@ namespace GWydiRTest.ModelTests
 
             IWizard mockWizard = MockRepository.GenerateMock<IWizard>();
             mockWizard.Expect(x => x.HasSubscription(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(true);
-            mockWizard.Expect(x => x.GetThumbPrint(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(String.Empty);
+            mockWizard.Expect(x => x.GetSTSThumbPrint(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(String.Empty);
 
 
             X509Certificate2 mockCertificate = MockRepository.GenerateStub<X509Certificate2>();
@@ -175,7 +175,7 @@ namespace GWydiRTest.ModelTests
 
             model = new OverRiddenAuthorisationModel_1(mockView, mockWizard, mockManager);
 
-            model.certificate = mockCertificate;
+            model.certificateSTS = mockCertificate;
 
             //Act
             model.NextHandler(new object(), new EventArgs());
@@ -363,6 +363,7 @@ namespace GWydiRTest.ModelTests
             mockWizard.VerifyAllExpectations();
         }
 
+        //BROKEN
         [Test]
         public void CreateButtonHandlerTest()
         {
@@ -377,9 +378,9 @@ namespace GWydiRTest.ModelTests
             mockView.Expect(x => x.EnableNext());
 
             CertificateMaker mockMaker = MockRepository.GenerateMock<CertificateMaker>();
-            X509Certificate2 mockCert = MockRepository.GenerateStub<X509Certificate2>();
-            mockCert.Stub(x => x.GetRawCertData()).Return(new byte[1]);
-            mockMaker.Expect(x => x.MakeCertificate(Arg<string>.Is.Anything, Arg<X509Certificate2>.Is.Anything)).Return(mockCert);
+            System.IO.MemoryStream mockSteam = MockRepository.GenerateStub<System.IO.MemoryStream>();
+            mockSteam.Stub(x => x.ToArray()).Return(new byte[1]);
+            mockMaker.Expect(x => x.MakeCertificate(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
 
             model = new OverRiddenAuthorisationModel_1(mockView, mockWizard, mockMaker, mockWriter);
 

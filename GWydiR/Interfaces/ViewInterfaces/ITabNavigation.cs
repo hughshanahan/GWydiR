@@ -7,9 +7,10 @@ namespace GWydiR.Interfaces.ViewInterfaces
 {
     public interface ITabNavigation
     {
-        void RegisterNext(EventHandler nextHandler);
-        void RegisterPrevious(EventHandler previousHandler);
-        void DeRegisterNext(EventHandler nextHandler);
-        void DeRegisterPrevious(EventHandler previousHandler);
+        void RegisterNext(EventHandler nextHandler,int tabNumber);
+        void RegisterPrevious(EventHandler previousHandler,int tabNumber);
+        void DeRegisterNext(EventHandler nextHandler, int tabNumber);
+        void DeRegisterPrevious(EventHandler previousHandler, int tabNumber);
+        void ChangeTab(int i);
     }
 }

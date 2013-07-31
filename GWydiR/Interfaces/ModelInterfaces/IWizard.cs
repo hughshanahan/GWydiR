@@ -16,10 +16,10 @@ namespace GWydiR.Interfaces.ModelInterfaces
          bool isValidSID(string SID);
          void addSID(string SID);
          void AddCertificate(string certName);
-         void AddSubscription(string SID, string certificateName, string certificateThumbPrint);
+         void AddSubscription(string SID, string certificateName, string STSCertificateThumbprint, string ManagementCertificateThumbprint);
          List<Subscription> GetSubscriptions();
          bool HasSubscription(string SID, string certificateName);
-         string GetThumbPrint(string SID, string certificateName);
+         string GetSTSThumbPrint(string SID, string certificateName);
          void SaveSubscriptions();
     }
 }

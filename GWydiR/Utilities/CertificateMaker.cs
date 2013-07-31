@@ -12,12 +12,16 @@ using Org.BouncyCastle.Crypto.Prng;
 using Org.BouncyCastle.Crypto.Generators;
 using System.Collections;
 using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Pkcs;
+using System.IO;
+using GWydiR.Containers;
 
 
 namespace GWydiR.Utilities
 {
     public class CertificateMaker : ICertificateMaker
     {
+
         /// <summary>
         /// This method takes in a principal name and converts it into a distinguished name for applying to the certificate, also an RSA key pair which is
         /// used to encypt the certificate. This certificate is then returned to the caller.
@@ -25,8 +29,9 @@ namespace GWydiR.Utilities
         /// <param name="principalName"></param>
         /// <param name="rsaKeyPair"></param>
         /// <returns></returns>
-        public virtual X509Certificate2 MakeCertificate(string principalName, X509Certificate2 cert)
+        public virtual PkcsCertificate MakeCertificate(string principalName, string password)
         {
+
             //build a key generator
             RsaKeyPairGenerator keyGen = makeRsaGenerator();
 
@@ -35,12 +40,13 @@ namespace GWydiR.Utilities
             keyGen.Init(makeKeyGenParameters());
 
             //must find out what var this is for type safety
-            var keyPair = keyGen.GenerateKeyPair();
+            AsymmetricCipherKeyPair keyPair = keyGen.GenerateKeyPair();
 
             //instantiate the generator
             X509V3CertificateGenerator certGen = makeCertificateGenerator();
 
             //set the values required by the generator to generate a certificate
+            //this may need adapting to make this more secure
             certGen.SetSerialNumber(BigInteger.One);
             //magic value
             certGen.SetIssuerDN(new Org.BouncyCastle.Asn1.X509.X509Name("OU=GWydiR"));
@@ -52,15 +58,37 @@ namespace GWydiR.Utilities
 
             //make a bouncy castle specific x509 certificate to transform into a .net certificate
             Org.BouncyCastle.X509.X509Certificate intermediateCertificate = certGen.Generate(keyPair.Private);
-            
-            //transform the bouncy castle certificate into a .net certificate
-            System.Security.Cryptography.X509Certificates.X509Certificate dotNetCertificate = makeDotNetX509Certificate(intermediateCertificate);
 
-            //transform .net certificate helper object into certificate2
-            X509Certificate2 returnCertificate = makeDotNetX509Certificate2(dotNetCertificate);
+            // make a .pfx from this certificate
+            Pkcs12Store store = makePkcsStore();
 
-            return returnCertificate;
+            // In a pkcs12 (.pfx file) we associate the private key with a certificate via the friendly name
+            string friendlyName = intermediateCertificate.SubjectDN.ToString();
+
+            // add the certificate to the store with the friendly name as the entry label
+            X509CertificateEntry certEntry = new X509CertificateEntry(intermediateCertificate);
+            store.SetCertificateEntry(friendlyName, certEntry);
+
+            // add the private key with the same label/alias and an association with our intermediate certificate
+            // it takes an array of entries with which to associate as all of those entries could be certificates 
+            // signed with that private key.
+            store.SetKeyEntry(friendlyName, new AsymmetricKeyEntry(keyPair.Private), new[] { certEntry });
+
             
+            //make new certificate object
+            PkcsCertificate certificate = new PkcsCertificate(password, keyPair, intermediateCertificate, store);
+
+            return certificate;
+        }
+
+        protected virtual Pkcs12Store makePkcsStore()
+        {
+            return new Pkcs12Store();
+        }
+
+        protected virtual MemoryStream makeMemeoryStream()
+        {
+            return new MemoryStream();
         }
 
         /// <summary>

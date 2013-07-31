@@ -34,7 +34,7 @@ namespace GWydiRTest.UtilitiesTests
             //Assert
             Assert.IsTrue(output[0].SID == test1);
             Assert.IsTrue(output[0].CertName == test2);
-            Assert.IsTrue(output[0].ThumbPrint == test3);
+            Assert.IsTrue(output[0].STSThumbPrint == test3);
         }
 
         [Test]

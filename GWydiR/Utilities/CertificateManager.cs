@@ -24,7 +24,7 @@ namespace GWydiR.Utilities
         {
             //open store
             //should use a wrapper class as the store object is sealed.
-            CertificateStore store = makeStore();
+            CertificateStore store = makeCurrentUserStore();
             store.Open(OpenFlags.ReadOnly);
 
             // retrieve collection for certificates from store
@@ -51,9 +51,14 @@ namespace GWydiR.Utilities
         /// Method to allow data injection for testing
         /// </summary>
         /// <returns></returns>
-        protected virtual CertificateStore makeStore()
+        protected virtual CertificateStore makeCurrentUserStore()
         {
             return new CertificateStore(new X509Store(StoreName.My, StoreLocation.CurrentUser));
+        }
+
+        protected virtual CertificateStore makeLocalMachineStore()
+        {
+            return new CertificateStore(new X509Store(StoreName.My, StoreLocation.LocalMachine));
         }
 
         protected virtual X509Certificate2Collection getCollection(CertificateStore store)
@@ -67,14 +72,21 @@ namespace GWydiR.Utilities
         /// <param name="testCert"></param>
         public void SaveCertificateLocally(System.Security.Cryptography.X509Certificates.X509Certificate2 testCert)
         {
-            CertificateStore store = makeStore();
+            CertificateStore store = makeCurrentUserStore();
+            store.Open(OpenFlags.ReadWrite);
             store.Add(testCert);
+            store.Close();
+            store = makeLocalMachineStore();
+            store.Open(OpenFlags.ReadWrite);
+            store.Add(testCert);
+            store.Close();
+            
         }
 
         public virtual X509Certificate2 GetLocalCertificate(string ThumbPrint)
         {
             X509Certificate2 returnCert = null;
-            CertificateStore store = makeStore();
+            CertificateStore store = makeCurrentUserStore();
             X509Certificate2Collection collection = store.GetCertificates();
             foreach (X509Certificate2 cert in collection)
             {
@@ -91,8 +103,14 @@ namespace GWydiR.Utilities
 
         public void RemoveCertificateLocally(X509Certificate2 certificate)
         {
-            CertificateStore store = makeStore();
+            CertificateStore store = makeCurrentUserStore();
+            store.Open(OpenFlags.ReadOnly);
             store.Remove(certificate);
+            store.Close();
+            store = makeLocalMachineStore();
+            store.Open(OpenFlags.ReadOnly);
+            store.Remove(certificate);
+            store.Close();
         }
     }
 }

@@ -346,7 +346,7 @@ namespace GWydiR.Test
             string testCertThumb = "aCertThumb";
 
             //Act
-            wizard.AddSubscription(testSID, testCertName, testCertThumb);
+            wizard.AddSubscription(testSID, testCertName, testCertThumb,testCertThumb);
 
             //Assert
             Assert.IsTrue(wizard.GetSubscriptions().Count == 1);
@@ -376,7 +376,7 @@ namespace GWydiR.Test
             string testCertThumb = "aCertThumb";
 
             //Act
-            wizard.AddSubscription(testSID, testCertName, testCertThumb);
+            wizard.AddSubscription(testSID, testCertName, testCertThumb,testCertThumb);
             bool pass = wizard.HasSubscription(testSID, testCertName);
 
             //Assert
@@ -392,8 +392,8 @@ namespace GWydiR.Test
             string testCertThumb = "aCertThumb";
             
             //Act
-            wizard.AddSubscription(testSID, testCertName, testCertThumb); 
-            wizard.AddSubscription(testSID, testCertName, testCertThumb);
+            wizard.AddSubscription(testSID, testCertName, testCertThumb, testCertThumb); 
+            wizard.AddSubscription(testSID, testCertName, testCertThumb, testCertThumb);
 
             //Assert
             Assert.IsTrue(wizard.GetSubscriptions().Count == 1);
@@ -407,10 +407,10 @@ namespace GWydiR.Test
             string testCertName = "aCertname";
             string testCertPrint = "aprint";
 
-            wizard.AddSubscription(testSID, testCertName, testCertPrint);
+            wizard.AddSubscription(testSID, testCertName, testCertPrint, testCertPrint);
 
             //Act
-            string output = wizard.GetThumbPrint(testSID,testCertName);
+            string output = wizard.GetSTSThumbPrint(testSID,testCertName);
 
             //Assert
             Assert.IsTrue(output == testCertPrint);

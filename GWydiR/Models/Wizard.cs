@@ -180,14 +180,15 @@ namespace GWydiR
         /// </summary>
         /// <param name="SID"></param>
         /// <param name="CertificateName"></param>
-        public void AddSubscription(string SID, string certificateName, string certificateThumbPrint)
+        public void AddSubscription(string SID, string certificateName, string STSCertificateThumbPrint, string ManagementCertificateThumbPrint)
         {
             if (!HasSubscription(SID, certificateName))
             {
                 Subscription subscription = new Subscription();
                 subscription.SID = SID;
                 subscription.CertName = certificateName;
-                subscription.ThumbPrint = certificateThumbPrint;
+                subscription.STSThumbPrint = STSCertificateThumbPrint;
+                subscription.ManagementThumbprint = ManagementCertificateThumbPrint;
                 SubscriptionsList.Add(subscription);
             }
         }
@@ -226,14 +227,33 @@ namespace GWydiR
         /// <param name="SID"></param>
         /// <param name="Cert"></param>
         /// <returns></returns>
-        public string GetThumbPrint(string SID, string Cert)
+        public string GetSTSThumbPrint(string SID, string Cert)
         {
             string returnString = "";
             foreach (Subscription subscription in SubscriptionsList)
             {
                 if (subscription.SID == SID && subscription.CertName == Cert)
                 {
-                    returnString = subscription.ThumbPrint;
+                    returnString = subscription.STSThumbPrint;
+                }
+            }
+            return returnString;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SID"></param>
+        /// <param name="Cert"></param>
+        /// <returns></returns>
+        public string GetManagementThumbPrint(string SID, string Cert)
+        {
+            string returnString = "";
+            foreach (Subscription subscription in SubscriptionsList)
+            {
+                if (subscription.SID == SID && subscription.CertName == Cert)
+                {
+                    returnString = subscription.ManagementThumbprint;
                 }
             }
             return returnString;
@@ -248,7 +268,7 @@ namespace GWydiR
             List<string> subscriptions = new List<string>();
             foreach(Subscription s in SubscriptionsList)
             {
-                subscriptions.Add(s.SID + "," + s.CertName + "," + s.ThumbPrint);
+                subscriptions.Add(s.SID + "," + s.CertName + "," + s.STSThumbPrint + "," + s.ManagementThumbprint);
             }
             writer.Write(SubscriptionsFileName, subscriptions);
         }
