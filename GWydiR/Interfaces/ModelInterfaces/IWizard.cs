@@ -6,6 +6,9 @@ using GWydiR.Containers;
 
 namespace GWydiR.Interfaces.ModelInterfaces
 {
+    /// <summary>
+    /// An interface to describe the public methods of the Wizard class, used mainly to allow mocking during testing.
+    /// </summary>
     public interface IWizard
     {
         List<string> GetSIDList();

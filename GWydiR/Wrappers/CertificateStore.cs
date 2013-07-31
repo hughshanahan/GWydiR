@@ -7,11 +7,15 @@ using System.Security.Cryptography.X509Certificates;
 namespace GWydiR.Wrappers
 {
     /// <summary>
-    /// This class wraps the X509Store objects from System.Security.Cryptography.X509Certificates
+    /// This class wraps the X509Store objects from System.Security.Cryptography.X509Certificates, the use of this is to
+    /// provide a means to mock methods belonging to the wrapped object.
     /// </summary>
     public class CertificateStore
     {
 
+        /// <summary>
+        /// A refference to an object that is wrapped by an instancce of this class.
+        /// </summary>
         public X509Store store { get; set; }
 
         public CertificateStore()
