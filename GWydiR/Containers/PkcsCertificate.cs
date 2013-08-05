@@ -55,6 +55,12 @@ namespace GWydiR.Containers
         /// </summary>
         public Pkcs12Store PkcsStore { get; set; }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public PkcsCertificate() { }
+
         /// <summary>
         /// Public Constructor for a Pkcs certificate, takes in values to descibe the state of a certificate.
         /// The password of the certificte is set to an empty string.
@@ -101,7 +107,7 @@ namespace GWydiR.Containers
         /// Method to save the Pkcs store an instance of this class represents to a memory stream for writing to files.
         /// </summary>
         /// <returns>Memory stream representing the bytes that make up the X509certificate instance of this class</returns>
-        public MemoryStream GetCertificateStream()
+        public virtual MemoryStream GetCertificateStream()
         {
             MemoryStream returnStream = new MemoryStream();
             PkcsStore.Save(returnStream,this.Password.ToCharArray(),new Org.BouncyCastle.Security.SecureRandom());
@@ -114,7 +120,7 @@ namespace GWydiR.Containers
         /// </summary>
         /// <param name="flags">Flags that denote values that can be given when creating a X509Certificate2 object</param>
         /// <returns>An X509Certificate2 object</returns>
-        public X509Certificate2 GetX509Certificate2(X509KeyStorageFlags flags)
+        public virtual X509Certificate2 GetX509Certificate2(X509KeyStorageFlags flags)
         {
             return new X509Certificate2(GetCertificateStream().ToArray(), this.Password, flags);
         }

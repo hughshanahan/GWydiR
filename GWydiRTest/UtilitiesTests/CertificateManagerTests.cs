@@ -77,6 +77,11 @@ namespace GWydiRTest.UtilitiesTests
             {
                 return mockStore;
             }
+
+            protected override CertificateStore makeLocalMachineStore()
+            {
+                return mockStore;
+            }
             
         }
 
@@ -84,8 +89,9 @@ namespace GWydiRTest.UtilitiesTests
         public void AddCertToStoreTest()
         {
             //Arrange
-            CertificateStore mockStore = MockRepository.GenerateStub<CertificateStore>();
+            CertificateStore mockStore = MockRepository.GenerateMock<CertificateStore>();
             mockStore.Expect(x => x.Add(Arg<X509Certificate2>.Is.Anything));
+            mockStore.Stub(x => x.Open(Arg<OpenFlags>.Is.Anything));
 
             certManager = new OverRidenManager_2(mockStore);
 

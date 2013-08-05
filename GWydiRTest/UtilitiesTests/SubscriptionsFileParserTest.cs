@@ -26,7 +26,8 @@ namespace GWydiRTest.UtilitiesTests
             string test1 = "test1";
             string test2 = "test2";
             string test3 = "test3";
-            List<string> testFileData = new List<string>() { test1+","+test2+","+test3 };
+            string test4 = "test4";
+            List<string> testFileData = new List<string>() { test1+","+test2+","+test3 + "," + test4 };
 
             //Act
             List<Subscription> output = parser.ParseSubscriptions(testFileData);
