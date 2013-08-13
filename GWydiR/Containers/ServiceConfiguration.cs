@@ -8,6 +8,7 @@ namespace GWydiR.Containers
 {
     
     [Serializable]
+    [XmlRootAttribute(Namespace="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration")]
     public class ServiceConfiguration
     {
         [XmlAttribute]
@@ -26,7 +27,7 @@ namespace GWydiR.Containers
 
         public ServiceConfiguration(int instanceCount,string StorageAccConnectionString,string StsCertificateThumbprint,string ManagementCertificateThumbprint,string HostUrl, bool InsecureAccess,string ServiceName,string SID)
         {
-            ServiceName = "GenericWorkerRole";
+            serviceName = "GenericWorkerRole";
             osFamily = 2;
             osVersion = "*";
 
@@ -84,6 +85,7 @@ namespace GWydiR.Containers
         {
             this.name = name;
             this.value = value;
+            Console.Out.Write(value);
         }
     }
 

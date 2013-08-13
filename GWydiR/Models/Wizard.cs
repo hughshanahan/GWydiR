@@ -295,9 +295,12 @@ namespace GWydiR
 
             ServiceConfiguration config = new ServiceConfiguration(InstanceCount,AppStorageAccountConnectionString,
                 GetSTSThumbPrint(ChosenSID,ChosenCertificate),GetManagementThumbPrint(ChosenSID,ChosenCertificate),AppUrl,true, AppUrl.Split('.')[0], ChosenSID);
+
+            XmlSerializerNamespaces nameSpaces = new XmlSerializerNamespaces();
+            nameSpaces.Add("", "http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration");
             XmlSerializer serializer = new XmlSerializer(config.GetType());
             MemoryStream xmlFile = new MemoryStream();
-            serializer.Serialize(xmlFile, config);
+            serializer.Serialize(xmlFile, config, nameSpaces);
 
             FileWriter writer = makeWriter();
             writer.Write(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + AppUrl.Split('.')[0] + "Production.cscfg", xmlFile.ToArray());
