@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using GWydiR;
 using GWydiR.Models;
+using GWydiR.Forms;
 
 namespace WindowsFormsApplication1
 {
@@ -23,6 +24,7 @@ namespace WindowsFormsApplication1
             Wizard wizard = new Wizard(); // need to add an object to congiure the wizard from subscritions/config files
             AuthorisationModel authModel = new AuthorisationModel(ui, wizard);
             ConfigurationModel confModel = new ConfigurationModel(ui, wizard);
+            ProductionModel prodModel = new ProductionModel(ui, wizard);
 
             Application.Run(ui);
         }

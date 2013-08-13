@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using GWydiR;
 
-
-namespace GWydiR.Test
+namespace NUnitTest1
 {
     class Program
     {
         [STAThread]
         static void Main(string[] args)
-        {         
-
+        {
             string[] my_args = { Assembly.GetExecutingAssembly().Location };
 
             int returnCode = NUnit.ConsoleRunner.Runner.Main(my_args);

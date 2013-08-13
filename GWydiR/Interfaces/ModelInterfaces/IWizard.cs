@@ -11,6 +11,12 @@ namespace GWydiR.Interfaces.ModelInterfaces
     /// </summary>
     public interface IWizard
     {
+        string ChosenCertificate { get; set; }
+        string ChosenSID { get; set; }
+        int InstanceCount { get; set; }
+        string AppUrl { get; set; }
+        string AppStorageAccountConnectionString { get; set; }
+        string DataStorageAccountConnectionString { get; set; }
         List<string> GetSIDList();
         List<string> GetCertList();
          FileReader makeReader();
@@ -24,5 +30,6 @@ namespace GWydiR.Interfaces.ModelInterfaces
          bool HasSubscription(string SID, string certificateName);
          string GetSTSThumbPrint(string SID, string certificateName);
          void SaveSubscriptions();
+         void WriteConfigurationFile();
     }
 }

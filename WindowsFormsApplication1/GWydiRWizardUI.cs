@@ -10,9 +10,9 @@ using Microsoft.VisualBasic;
 using GWydiR;
 using GWydiR.Interfaces.ViewInterfaces;
 
-namespace WindowsFormsApplication1
+namespace GWydiR.Forms
 {
-    public partial class GWydiRWizardUI : Form, IAuthorisationView, ITabNavigation, IViewError, IConfigurationView
+    public partial class GWydiRWizardUI : Form, IAuthorisationView, ITabNavigation, IViewError, IConfigurationView, IProductionView
     {
 
         /// <summary>
@@ -78,6 +78,10 @@ namespace WindowsFormsApplication1
                 case 1:
                     ConfigNextBtn.Click += nextHandler;
                     break;
+
+                case 2:
+                    ProductionNextBtn.Click += nextHandler;
+                    break;
             }
         }
 
@@ -90,6 +94,10 @@ namespace WindowsFormsApplication1
 
                 case 1:
                     ConfigPreviousBtn.Click += previousHandler;
+                    break;
+
+                case 2:
+                    ProductionPreviousBtn.Click += previousHandler;
                     break;
             }
         }
@@ -106,6 +114,10 @@ namespace WindowsFormsApplication1
                 case 1:
                     ConfigNextBtn.Click -= nextHandler;
                     break;
+
+                case 2:
+                    ProductionNextBtn.Click -= nextHandler;
+                    break;
             }
         }
 
@@ -118,6 +130,10 @@ namespace WindowsFormsApplication1
 
                 case 1:
                     ConfigPreviousBtn.Click -= previousHandler;
+                    break;
+
+                case 2:
+                    ProductionPreviousBtn.Click -= previousHandler;
                     break;
             }
         }
@@ -270,5 +286,22 @@ namespace WindowsFormsApplication1
             WizardTabPanel.SelectedTab = WizardTabPanel.TabPages[i];
         }
 
+
+        public int GetInstanceCount()
+        {
+            return int.Parse(InstanceCountTxtbx.Text);
+        }
+
+
+        public string GetPassword()
+        {
+            return CertPasswordTxtbx.Text;
+        }
+
+
+        public void RegisterCertificatePasswordChanged(EventHandler handler)
+        {
+            CertPasswordTxtbx.TextChanged += handler;
+        }
     }
 }

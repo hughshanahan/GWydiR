@@ -6,11 +6,25 @@ using System.Text.RegularExpressions;
 using System.IO;
 using GWydiR.Utilities;
 using GWydiR.Containers;
+using GWydiR.VenusC;
+using System.Xml.Serialization;
 
 namespace GWydiR
 {
     public class Wizard : GWydiR.Interfaces.ModelInterfaces.IWizard
     {
+
+        public string ChosenSID { get; set; }
+
+        public string ChosenCertificate { get; set; }
+
+        public int InstanceCount { get; set; }
+
+        public string AppUrl { get; set; }
+
+        public string AppStorageAccountConnectionString { get; set; }
+
+        public string DataStorageAccountConnectionString { get; set; }
 
         private string SubscriptionsFileName;
 
@@ -272,5 +286,23 @@ namespace GWydiR
             }
             writer.Write(SubscriptionsFileName, subscriptions);
         }
+
+        /// <summary>
+        /// Writes the configureation data stored in the wizard to a .cscsfg file (an xml file).
+        /// </summary>
+        public void WriteConfigurationFile()
+        {
+
+            ServiceConfiguration config = new ServiceConfiguration(InstanceCount,AppStorageAccountConnectionString,
+                GetSTSThumbPrint(ChosenSID,ChosenCertificate),GetManagementThumbPrint(ChosenSID,ChosenCertificate),AppUrl,true, AppUrl.Split('.')[0], ChosenSID);
+            XmlSerializer serializer = new XmlSerializer(config.GetType());
+            MemoryStream xmlFile = new MemoryStream();
+            serializer.Serialize(xmlFile, config);
+
+            FileWriter writer = makeWriter();
+            writer.Write(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + AppUrl.Split('.')[0] + "Production.cscfg", xmlFile.ToArray());
+
+        }
+
     }
 }

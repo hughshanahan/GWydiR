@@ -116,16 +116,20 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\ServiceConfiguration.cs" />
     <Compile Include="Containers\PkcsCertificate.cs" />
     <Compile Include="Containers\Subscription.cs" />
+    <Compile Include="Flags\AccountType.cs" />
     <Compile Include="Handlers\GWydiRHandlers.cs" />
     <Compile Include="Interfaces\ModelInterfaces\IWizard.cs" />
     <Compile Include="Interfaces\UtilityInterfaces\ICertificateMaker.cs" />
     <Compile Include="Interfaces\UtilityInterfaces\ICertificateManager.cs" />
     <Compile Include="Interfaces\ViewInterfaces\IConfigurationView.cs" />
+    <Compile Include="Interfaces\ViewInterfaces\IProductionView.cs" />
     <Compile Include="Interfaces\ViewInterfaces\IViewError.cs" />
     <Compile Include="Models\AuthorisationModel.cs" />
-    <Compile Include="Models\ConfigureationModel.cs" />
+    <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\ProductionModel.cs" />
     <Compile Include="Utilities\CertificateMaker.cs" />
     <Compile Include="Utilities\CertificateManager.cs" />
     <Compile Include="Utilities\FileReader.cs" />
@@ -143,6 +147,8 @@
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Models\Wizard.cs" />
     <Compile Include="Utilities\SubscriptionFileParser.cs" />
+    <Compile Include="VenusC\ConfigVariables.cs" />
+    <Compile Include="VenusC\SettingsXmlHandler.cs" />
     <Compile Include="Wrappers\CertificateStore.cs" />
   </ItemGroup>
   <ItemGroup>

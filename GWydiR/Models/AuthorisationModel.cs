@@ -59,6 +59,8 @@ namespace GWydiR
             authorisationView.RegisterChangedCertificateSelection(ChangedCertificateSelectionHandler);
             //register for create button click
             authorisationView.RegisterCreate(CreateButtonHandler);
+            //register password changed handler
+            authorisationView.RegisterCertificatePasswordChanged(CertficatePasswordChanged);
 
             ITabNavigation genericPanel = CastITabNavigation(authorisationView);
             genericPanel.RegisterNext(NextHandler,TabNumber);
@@ -161,9 +163,10 @@ namespace GWydiR
         }
 
         /// <summary>
-        /// 
+        /// Handler for new certificate event, a string array is passed the first element of which is the certificate name
+        /// and the second is the password to be used to secure the certificate.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Data will be an array of strings</param>
         public void NewCertificateHandler(object data)
         {
             string[] certData = (string[])data;
@@ -171,6 +174,10 @@ namespace GWydiR
             Password = certData[1];
             wizard.AddCertificate(Cert);
             authorisationView.DisplayCertificates(wizard.GetCertList());
+
+            // UI actions
+            authorisationView.EnableCreate();
+            authorisationView.DisableNext();
         }
 
         /// <summary>
@@ -183,6 +190,7 @@ namespace GWydiR
         {
             //set selected value in model
             SID = wizard.GetSIDList()[index];
+            wizard.ChosenSID = SID;
 
             int returnIndex = -1;
             if ((index  < wizard.GetSubscriptions().Count))
@@ -199,6 +207,7 @@ namespace GWydiR
         {
             //set selected value in model
             Cert = wizard.GetCertList()[index];
+            wizard.ChosenCertificate = Cert;
 
             //if the current SID and cert selected are a valid subscription
             if (wizard.HasSubscription(SID, Cert))
@@ -295,6 +304,11 @@ namespace GWydiR
         protected virtual FileWriter makeFileWriter()
         {
             return new FileWriter();
+        }
+
+        public void CertficatePasswordChanged(object sender, EventArgs args)
+        {
+            Password = authorisationView.GetPassword();
         }
 
 

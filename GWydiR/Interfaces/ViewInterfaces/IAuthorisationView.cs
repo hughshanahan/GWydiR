@@ -112,5 +112,9 @@ namespace GWydiR.Interfaces.ViewInterfaces
         /// <param name="handler"></param>
         void DeRegisterCreate(EventHandler handler);
 
+        string GetPassword();
+
+        void RegisterCertificatePasswordChanged(EventHandler handler);
+
     }
 }

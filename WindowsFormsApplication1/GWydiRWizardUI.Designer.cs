@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace GWydiR.Forms
 {
     partial class GWydiRWizardUI
     {
@@ -67,6 +67,15 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.CloudServiceNametxtbx = new System.Windows.Forms.TextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.VMSizeCombobx = new System.Windows.Forms.ComboBox();
+            this.InstanceCountTxtbx = new System.Windows.Forms.TextBox();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.ProductionPreviousBtn = new System.Windows.Forms.Button();
+            this.ProductionNextBtn = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.WizardTabPanel.SuspendLayout();
             this.AuthorisationTab.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -82,6 +91,9 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // WizardTabPanel
@@ -89,6 +101,7 @@
             this.WizardTabPanel.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.WizardTabPanel.Controls.Add(this.AuthorisationTab);
             this.WizardTabPanel.Controls.Add(this.ConfigurationPage);
+            this.WizardTabPanel.Controls.Add(this.tabPage1);
             this.WizardTabPanel.Location = new System.Drawing.Point(-2, 0);
             this.WizardTabPanel.Multiline = true;
             this.WizardTabPanel.Name = "WizardTabPanel";
@@ -444,6 +457,90 @@
             this.CloudServiceNametxtbx.Size = new System.Drawing.Size(203, 20);
             this.CloudServiceNametxtbx.TabIndex = 1;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.pictureBox3);
+            this.tabPage1.Controls.Add(this.label11);
+            this.tabPage1.Controls.Add(this.label10);
+            this.tabPage1.Controls.Add(this.VMSizeCombobx);
+            this.tabPage1.Controls.Add(this.InstanceCountTxtbx);
+            this.tabPage1.Controls.Add(this.panel9);
+            this.tabPage1.Location = new System.Drawing.Point(23, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(614, 473);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Production";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(205, 176);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(106, 13);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Virtual Machine Size:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(352, 148);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(110, 13);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Number Of Instances:";
+            // 
+            // VMSizeCombobx
+            // 
+            this.VMSizeCombobx.FormattingEnabled = true;
+            this.VMSizeCombobx.Location = new System.Drawing.Point(317, 171);
+            this.VMSizeCombobx.Name = "VMSizeCombobx";
+            this.VMSizeCombobx.Size = new System.Drawing.Size(204, 21);
+            this.VMSizeCombobx.TabIndex = 5;
+            // 
+            // InstanceCountTxtbx
+            // 
+            this.InstanceCountTxtbx.Location = new System.Drawing.Point(468, 145);
+            this.InstanceCountTxtbx.Name = "InstanceCountTxtbx";
+            this.InstanceCountTxtbx.Size = new System.Drawing.Size(53, 20);
+            this.InstanceCountTxtbx.TabIndex = 4;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.ProductionPreviousBtn);
+            this.panel9.Controls.Add(this.ProductionNextBtn);
+            this.panel9.Location = new System.Drawing.Point(3, 411);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(608, 33);
+            this.panel9.TabIndex = 3;
+            // 
+            // ProductionPreviousBtn
+            // 
+            this.ProductionPreviousBtn.Location = new System.Drawing.Point(443, 5);
+            this.ProductionPreviousBtn.Name = "ProductionPreviousBtn";
+            this.ProductionPreviousBtn.Size = new System.Drawing.Size(75, 23);
+            this.ProductionPreviousBtn.TabIndex = 1;
+            this.ProductionPreviousBtn.Text = "Previous";
+            this.ProductionPreviousBtn.UseVisualStyleBackColor = true;
+            // 
+            // ProductionNextBtn
+            // 
+            this.ProductionNextBtn.Location = new System.Drawing.Point(523, 5);
+            this.ProductionNextBtn.Name = "ProductionNextBtn";
+            this.ProductionNextBtn.Size = new System.Drawing.Size(75, 23);
+            this.ProductionNextBtn.TabIndex = 0;
+            this.ProductionNextBtn.Text = "Next";
+            this.ProductionNextBtn.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
+            this.pictureBox3.Location = new System.Drawing.Point(10, 8);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(593, 132);
+            this.pictureBox3.TabIndex = 8;
+            this.pictureBox3.TabStop = false;
+            // 
             // GWydiRWizardUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -475,6 +572,10 @@
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -519,6 +620,15 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox CertPasswordTxtbx;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button ProductionPreviousBtn;
+        private System.Windows.Forms.Button ProductionNextBtn;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox VMSizeCombobx;
+        private System.Windows.Forms.TextBox InstanceCountTxtbx;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
 
