@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using GWydiR.Interfaces.ModelInterfaces;
 using GWydiR.Interfaces.ViewInterfaces;
+using GWydiR.Utilities;
+using System.Configuration;
 
 namespace GWydiR.Models
 {
@@ -13,6 +15,7 @@ namespace GWydiR.Models
         private int NumberOfInstances;
         private IWizard wizard;
         private IProductionView view;
+        private string VMSize;
 
         public ProductionModel()
         { }
@@ -20,11 +23,21 @@ namespace GWydiR.Models
         public ProductionModel(IProductionView view, IWizard wizard)
         {
             this.view = view;
+            // This reads the folder with VMSizes in, formatting the names into a list
+            // and delivering the to the UI to be drawn in the combo box
+            FileEnumerator FileEnum = makeFileEnumerator();
+            view.SetVmSizes(FileEnum.Enumerate(ConfigurationManager.AppSettings["VMSizesFolder"]));
+
             ITabNavigation navView = castNavigationView(view);
             navView.RegisterNext(NextHandler, TabNumber);
             navView.RegisterPrevious(PreviousHandler, TabNumber);
 
             this.wizard = wizard;
+        }
+
+        protected virtual FileEnumerator makeFileEnumerator()
+        {
+            return new FileEnumerator();
         }
 
         protected virtual ITabNavigation castNavigationView(IProductionView view)
@@ -42,6 +55,18 @@ namespace GWydiR.Models
             wizard.WriteConfigurationFile();
             ITabNavigation navView = castNavigationView(view);
             //navView.ChangeTab(TabNumber + 1); //Doesn't exist yet
+            
+            //Need to copy file defining VM onto the desktop
+            VMSize = view.GetVmSize();
+            wizard.VMSize = VMSize;
+            try
+            {
+                wizard.CopyVmFileToDesktop();
+            } catch (Exception exc)
+            {
+                ((IViewError)view).NotifyOfError(exc);
+            }
+
         }
 
         public void PreviousHandler(object sender, EventArgs args)

@@ -31,5 +31,7 @@ namespace GWydiR.Interfaces.ModelInterfaces
          string GetSTSThumbPrint(string SID, string certificateName);
          void SaveSubscriptions();
          void WriteConfigurationFile();
+         void CopyVmFileToDesktop();
+         string VMSize { get; set; }
     }
 }

@@ -8,11 +8,13 @@ using GWydiR.Utilities;
 using GWydiR.Containers;
 using GWydiR.VenusC;
 using System.Xml.Serialization;
+using System.Configuration;
 
 namespace GWydiR
 {
     public class Wizard : GWydiR.Interfaces.ModelInterfaces.IWizard
     {
+        public string VMSize { get; set; }
 
         public string ChosenSID { get; set; }
 
@@ -303,9 +305,31 @@ namespace GWydiR
             serializer.Serialize(xmlFile, config, nameSpaces);
 
             FileWriter writer = makeWriter();
-            writer.Write(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + AppUrl.Split('.')[0] + "Production.cscfg", xmlFile.ToArray());
+            // make desktop name creation into a function as it it used a lot
+            writer.Write(makeDesktopFileName(AppUrl.Split('.')[0] + "Production.cscfg"), xmlFile.ToArray());
 
         }
+
+        private string makeDesktopFileName(string fileName)
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + fileName;
+        }
+
+
+        /// <summary>
+        /// Copies a file from the instllation directory to the users desktop based on
+        /// a selection they make in the UI
+        /// </summary>
+        public void CopyVmFileToDesktop()
+        {
+            //might be better to move this out to a separate funtion for testing.
+            string filepath = ConfigurationManager.AppSettings["VMSizesFolder"] + "\\" + VMSize;
+            string newFilePath = makeDesktopFileName(VMSize);
+
+            File.Copy(filepath, newFilePath);
+           
+        }
+
 
     }
 }

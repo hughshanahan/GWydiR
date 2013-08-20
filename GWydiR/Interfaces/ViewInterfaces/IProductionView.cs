@@ -8,5 +8,7 @@ namespace GWydiR.Interfaces.ViewInterfaces
     public interface IProductionView
     {
         int GetInstanceCount();
+        void SetVmSizes(List<string> VmSizes);
+        string GetVmSize();
     }
 }

@@ -12,6 +12,7 @@ using GWydiR.Interfaces.ViewInterfaces;
 
 namespace GWydiR.Forms
 {
+    //This class seems monolithic and as such may need breaking up, even if only into separate files.
     public partial class GWydiRWizardUI : Form, IAuthorisationView, ITabNavigation, IViewError, IConfigurationView, IProductionView
     {
 
@@ -302,6 +303,19 @@ namespace GWydiR.Forms
         public void RegisterCertificatePasswordChanged(EventHandler handler)
         {
             CertPasswordTxtbx.TextChanged += handler;
+        }
+
+
+        public string GetVmSize()
+        {
+            return (string)VMSizeCombobx.SelectedValue;
+        }
+
+
+        public void SetVmSizes(List<string> VmSizes)
+        {
+            VMSizeCombobx.DataSource = null;
+            VMSizeCombobx.DataSource = VmSizes;
         }
     }
 }

@@ -116,6 +116,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\DirectoryWrapper.cs" />
     <Compile Include="Containers\ServiceConfiguration.cs" />
     <Compile Include="Containers\PkcsCertificate.cs" />
     <Compile Include="Containers\Subscription.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Models\ProductionModel.cs" />
     <Compile Include="Utilities\CertificateMaker.cs" />
     <Compile Include="Utilities\CertificateManager.cs" />
+    <Compile Include="Utilities\FileEnumerator.cs" />
     <Compile Include="Utilities\FileReader.cs" />
     <Compile Include="Utilities\FileWriter.cs" />
     <Compile Include="Interfaces\ViewInterfaces\IAuthorisationView.cs" />
