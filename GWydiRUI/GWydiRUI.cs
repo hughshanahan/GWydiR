@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GWTestR
+namespace GWydiRUI
 {
-    public partial class Form1 : Form
+    public partial class GWydiRUI : Form
     {
-        public Form1()
+        public GWydiRUI()
         {
             InitializeComponent();
         }

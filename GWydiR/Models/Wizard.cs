@@ -6,11 +6,10 @@ using System.Text.RegularExpressions;
 using System.IO;
 using GWydiR.Utilities;
 using GWydiR.Containers;
-using GWydiR.VenusC;
 using System.Xml.Serialization;
 using System.Configuration;
 
-namespace GWydiR
+namespace GWydiR.Models
 {
     public class Wizard : GWydiR.Interfaces.ModelInterfaces.IWizard
     {

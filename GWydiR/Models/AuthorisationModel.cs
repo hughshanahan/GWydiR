@@ -9,7 +9,7 @@ using GWydiR.Utilities;
 using GWydiR.Containers;
 using System.Security.Cryptography.X509Certificates;
 
-namespace GWydiR
+namespace GWydiR.Models
 {
     /// <summary>
     /// Class who responcibility it is to mirror the data avaliable to the user in the Authorisation Tab of the GWydiR Wizard.

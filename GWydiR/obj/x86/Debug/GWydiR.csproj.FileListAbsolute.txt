@@ -44,13 +44,8 @@ C:\Users\Jasper\GWydiR\GWydiR\bin\Debug\Pluralsight.Crypto.dll
 C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\bin\Debug\GWydiR.exe.config
 C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\obj\x86\Debug\GWydiR.exe
 C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\obj\x86\Debug\GWydiR.pdb
-C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\bin\Debug\GWydiR.exe.manifest
-C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\bin\Debug\GWydiR.application
 C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\bin\Debug\GWydiR.exe
 C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\bin\Debug\GWydiR.pdb
 C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\bin\Debug\Pluralsight.Crypto.dll
-C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\bin\Debug\ParallelExtensionsExtras.dll
 C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\bin\Debug\Microsoft.WindowsAzure.StorageClient.xml
 C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\obj\x86\Debug\GWydiR.csprojResolveAssemblyReference.cache
-C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\obj\x86\Debug\GWydiR.exe.manifest
-C:\Users\Jasper\Documents\GitHub\GWydiR\GWydiR\obj\x86\Debug\GWydiR.application

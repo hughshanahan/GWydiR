@@ -96,12 +96,6 @@
     <None Include="NUnit\nunit.core.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GWydiR\GWydiR.csproj">
-      <Project>{F38B45AA-54B5-4530-9DCF-A9F366ACB457}</Project>
-      <Name>GWydiR</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
@@ -122,6 +116,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GWydiR\GWydiR.csproj">
+      <Project>{94B84AF6-821E-491B-BC72-FFE826CCED0B}</Project>
+      <Name>GWydiR</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

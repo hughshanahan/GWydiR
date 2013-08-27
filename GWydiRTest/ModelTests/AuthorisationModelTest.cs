@@ -11,6 +11,7 @@ using GWydiR.Utilities;
 using System.Security.Cryptography.X509Certificates;
 using GWydiR.Exceptions;
 using GWydiR.Containers;
+using GWydiR.Models;
 
 namespace GWydiRTest.ModelTests
 {

@@ -8,13 +8,14 @@ using Rhino.Mocks;
 using GWydiR;
 using GWydiR.Utilities;
 using GWydiR.Containers;
+using GWydiR.Models;
 
 namespace GWydiR.Test
 {
     [TestFixture]
     class WizardTest
     {
-        GWydiR.Wizard wizard;
+        Wizard wizard;
         string testSID;
 
         // need to mock the reader and writer, this will mean adding factory methods for each, meaning that 

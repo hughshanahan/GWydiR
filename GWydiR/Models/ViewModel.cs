@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GWydiR
+namespace GWydiR.Models
 {
     /// <summary>
     /// This class is responcible for binding data to the WPFviews.
