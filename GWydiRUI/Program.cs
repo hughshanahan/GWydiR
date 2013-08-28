@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using GWydiR.Models;
 
 namespace GWydiRUI
 {
@@ -15,7 +16,13 @@ namespace GWydiRUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GWydiRUI());
+
+            GWydiRUI ui = new GWydiRUI();
+            GWydiRModel model = new GWydiRModel();
+
+            GWydiRConfigModel viewModel = new GWydiRConfigModel(ui,model);
+
+            Application.Run(ui);
         }
     }
 }

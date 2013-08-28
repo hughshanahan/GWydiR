@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using NUnit.Framework;
 using Rhino.Mocks;
-using GWydiR;
+using GWydiR.Utilities;
 
 namespace GWydiRTest
 {

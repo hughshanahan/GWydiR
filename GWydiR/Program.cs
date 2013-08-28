@@ -22,7 +22,7 @@ namespace GWydiR
     /// <summary>
     /// This is a simple class used to upload to and run r scripts on remote machines over the windows azure service
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
         /// String used to connect to a users data store on the azure service
@@ -33,11 +33,11 @@ namespace GWydiR
         /// Where the magic happens (program enters here)
         /// </summary>
         /// <param name="args"></param>
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             #region select input data
 
-            // Ask the user enter the location of a parameter file
+           /* // Ask the user enter the location of a parameter file
             Console.WriteLine("Location of parameter file is " + Properties.Settings.Default.setupParams);
             Console.WriteLine("Enter new location or press <Enter> if you want to keep it");
 
@@ -48,7 +48,15 @@ namespace GWydiR
             if ( newParamsFile != String.Empty ){
                  Properties.Settings.Default.setupParams = newParamsFile;
                  Properties.Settings.Default.Save();
+            } */
+
+            if (args.Length != 1)
+            {
+                throw new ArgumentException("GWydiR does not accept " + args.Length + " parameters, please input with the path to a parameter file");
             }
+
+            // read arguments into properties for param file location
+            Properties.Settings.Default.setupParams = args[0];
 
             // read in params from file at location in Properties.Settings.setupParams
             var paramsData = readParams();
@@ -200,15 +208,17 @@ namespace GWydiR
 
             #endregion
  
-            Console.WriteLine("Done");
+         /*   Console.WriteLine("Done");
 
            // var allJobs = submissionPortal.GetAllJobs();
 
             Console.WriteLine();
             Console.WriteLine("Press enter to quit");
-            Console.ReadLine();
+            Console.ReadLine(); 
+          */
         }
 
+        // retrieve param data from an datastructure type: dictionary 
         private static string getParamVariable(Dictionary<string,string> paramsData, string query, string otherwise)
         {
             string result = "";
@@ -221,7 +231,7 @@ namespace GWydiR
             return result;
         }
 
-        // Method for creating 
+        // Adds a new command file to a jod description after uploading a file to a blob
         private static void createArgument(string FileName, string commandName, VENUSJobDescription mySimpleJobDescription, CloudBlobContainer blobContainer, string nameOut="")
         {
    
