@@ -16,8 +16,14 @@ namespace GWydiR.Interfaces.ViewInterfaces
         string GetServiceURL();
         void SetServiceURL(string serviceURL);
 
+        string GetAppStorageContainerName();
+        void SetAppStorageContainerName(string appStorageContainerName);
+
         string GetAppStorageKey();
         void SetAppStorageKey(string appStorageKey);
+
+        string GetDataStorageContainerName();
+        void SetDataStorageContainerName(string dataStorageContainerName);
 
         string GetDataStorageKey();
         void SetDataStorageKey(string dataStorageKey);

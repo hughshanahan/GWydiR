@@ -52,7 +52,12 @@ namespace GWydiR
 
             if (args.Length != 1)
             {
-                throw new ArgumentException("GWydiR does not accept " + args.Length + " parameters, please input with the path to a parameter file");
+                string argString = null;
+                foreach (string arg in args)
+                {
+                    argString += " "+arg;
+                }
+                throw new ArgumentException("GWydiR does not accept " + argString + " as parameters, please input with the path to a parameter file");
             }
 
             // read arguments into properties for param file location
@@ -91,7 +96,7 @@ namespace GWydiR
 
             string outputRoot = getParamVariable(paramsData,"outputRoot",@"test");
 
-            string appKeyFile = getParamVariable(paramsData,"appKeyFile",@"");
+            string appKeyFile = getParamVariable(paramsData,"appKey",@"");
 
             string myApplicationName = getParamVariable(paramsData,"ApplicationURL",@"");
 

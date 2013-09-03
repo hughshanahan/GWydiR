@@ -46,12 +46,23 @@ namespace GWydiR.Models
             Model.SetConfiguration(View.GetDoUpload(), 
                 View.GetAppName(), 
                 View.GetServiceURL(), 
+                View.GetAppStorageContainerName(),
                 View.GetAppStorageKey(), 
+                View.GetDataStorageContainerName(),
                 View.GetDataStorageKey(), 
                 View.GetFullScriptFileName(), 
                 View.GetFullUserZipFileName(), 
                 View.GetFullListOfJobsCSVFileName(), 
                 View.GetRootFileOutForLogs());
+
+            try
+            {
+                Model.Run();
+            }
+            catch (Exception e)
+            {
+                ((IViewError)View).NotifyOfError(new Exception("Uploading and registering app failed\n" + "Error was: " + e.Message)); 
+            }
         }
     }
 }

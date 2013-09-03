@@ -38,15 +38,19 @@
             this.UserZipFileTextBox = new System.Windows.Forms.TextBox();
             this.RFileNameTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.UploadRunButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.UploadRunButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.AppStorageContainerNameTextBox = new System.Windows.Forms.TextBox();
+            this.DataStorageContainerNameTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,48 +80,52 @@
             // 
             // AppStorageKeyTextBox
             // 
-            this.AppStorageKeyTextBox.Location = new System.Drawing.Point(221, 99);
+            this.AppStorageKeyTextBox.Location = new System.Drawing.Point(221, 125);
             this.AppStorageKeyTextBox.Name = "AppStorageKeyTextBox";
             this.AppStorageKeyTextBox.Size = new System.Drawing.Size(176, 20);
             this.AppStorageKeyTextBox.TabIndex = 3;
             // 
             // DataStorageKeyTextBox
             // 
-            this.DataStorageKeyTextBox.Location = new System.Drawing.Point(221, 125);
+            this.DataStorageKeyTextBox.Location = new System.Drawing.Point(221, 177);
             this.DataStorageKeyTextBox.Name = "DataStorageKeyTextBox";
             this.DataStorageKeyTextBox.Size = new System.Drawing.Size(176, 20);
             this.DataStorageKeyTextBox.TabIndex = 4;
             // 
             // LogFileRootTextBox
             // 
-            this.LogFileRootTextBox.Location = new System.Drawing.Point(221, 229);
+            this.LogFileRootTextBox.Location = new System.Drawing.Point(221, 281);
             this.LogFileRootTextBox.Name = "LogFileRootTextBox";
             this.LogFileRootTextBox.Size = new System.Drawing.Size(176, 20);
             this.LogFileRootTextBox.TabIndex = 8;
             // 
             // ListOfWorkItemsTextBox
             // 
-            this.ListOfWorkItemsTextBox.Location = new System.Drawing.Point(221, 203);
+            this.ListOfWorkItemsTextBox.Location = new System.Drawing.Point(221, 255);
             this.ListOfWorkItemsTextBox.Name = "ListOfWorkItemsTextBox";
             this.ListOfWorkItemsTextBox.Size = new System.Drawing.Size(176, 20);
             this.ListOfWorkItemsTextBox.TabIndex = 7;
             // 
             // UserZipFileTextBox
             // 
-            this.UserZipFileTextBox.Location = new System.Drawing.Point(221, 177);
+            this.UserZipFileTextBox.Location = new System.Drawing.Point(221, 229);
             this.UserZipFileTextBox.Name = "UserZipFileTextBox";
             this.UserZipFileTextBox.Size = new System.Drawing.Size(176, 20);
             this.UserZipFileTextBox.TabIndex = 6;
             // 
             // RFileNameTextBox
             // 
-            this.RFileNameTextBox.Location = new System.Drawing.Point(221, 151);
+            this.RFileNameTextBox.Location = new System.Drawing.Point(221, 203);
             this.RFileNameTextBox.Name = "RFileNameTextBox";
             this.RFileNameTextBox.Size = new System.Drawing.Size(176, 20);
             this.RFileNameTextBox.TabIndex = 5;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.DataStorageContainerNameTextBox);
+            this.panel1.Controls.Add(this.AppStorageContainerNameTextBox);
             this.panel1.Controls.Add(this.UploadRunButton);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label6);
@@ -136,19 +144,73 @@
             this.panel1.Controls.Add(this.ServiceURLTextBox);
             this.panel1.Controls.Add(this.AppNameTextBox);
             this.panel1.Controls.Add(this.DoUploadCheckBox);
-            this.panel1.Location = new System.Drawing.Point(102, 90);
+            this.panel1.Location = new System.Drawing.Point(102, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(400, 302);
+            this.panel1.Size = new System.Drawing.Size(400, 380);
             this.panel1.TabIndex = 9;
             // 
-            // label1
+            // UploadRunButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(158, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "App Name";
+            this.UploadRunButton.Location = new System.Drawing.Point(262, 307);
+            this.UploadRunButton.Name = "UploadRunButton";
+            this.UploadRunButton.Size = new System.Drawing.Size(101, 23);
+            this.UploadRunButton.TabIndex = 17;
+            this.UploadRunButton.Text = "Upload and Run";
+            this.UploadRunButton.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(118, 284);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(93, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Root For Log Files";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(86, 258);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(129, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Work Items CSV Full Path";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(99, 232);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(112, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Extra File Zip Full Path";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(128, 206);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "R Script Full Path";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(128, 180);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Data Storage Key";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(128, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "App Storage Key";
             // 
             // label2
             // 
@@ -159,68 +221,46 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Service URL";
             // 
-            // label3
+            // label1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(128, 128);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Data Storage Key";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(158, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "App Name";
             // 
-            // label4
+            // AppStorageContainerNameTextBox
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(128, 102);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "App Storage Key";
+            this.AppStorageContainerNameTextBox.Location = new System.Drawing.Point(221, 99);
+            this.AppStorageContainerNameTextBox.Name = "AppStorageContainerNameTextBox";
+            this.AppStorageContainerNameTextBox.Size = new System.Drawing.Size(176, 20);
+            this.AppStorageContainerNameTextBox.TabIndex = 18;
             // 
-            // label5
+            // DataStorageContainerNameTextBox
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(118, 232);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 13);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Root For Log Files";
+            this.DataStorageContainerNameTextBox.Location = new System.Drawing.Point(221, 151);
+            this.DataStorageContainerNameTextBox.Name = "DataStorageContainerNameTextBox";
+            this.DataStorageContainerNameTextBox.Size = new System.Drawing.Size(176, 20);
+            this.DataStorageContainerNameTextBox.TabIndex = 19;
             // 
-            // label6
+            // label9
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(86, 206);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(129, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Work Items CSV Full Path";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(66, 154);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(149, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Data Storage Container Name";
             // 
-            // label7
+            // label10
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(99, 180);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(112, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Extra File Zip Full Path";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(128, 154);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "R Script Full Path";
-            // 
-            // UploadRunButton
-            // 
-            this.UploadRunButton.Location = new System.Drawing.Point(262, 255);
-            this.UploadRunButton.Name = "UploadRunButton";
-            this.UploadRunButton.Size = new System.Drawing.Size(101, 23);
-            this.UploadRunButton.TabIndex = 17;
-            this.UploadRunButton.Text = "Upload and Run";
-            this.UploadRunButton.UseVisualStyleBackColor = true;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(70, 102);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(145, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "App Storage Container Name";
             // 
             // GWydiRUI
             // 
@@ -257,6 +297,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button UploadRunButton;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox DataStorageContainerNameTextBox;
+        private System.Windows.Forms.TextBox AppStorageContainerNameTextBox;
     }
 }
 

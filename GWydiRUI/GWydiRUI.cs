@@ -10,7 +10,7 @@ using GWydiR.Interfaces.ViewInterfaces;
 
 namespace GWydiRUI
 {
-    public partial class GWydiRUI : Form, IGWydiRConfigView
+    public partial class GWydiRUI : Form, IGWydiRConfigView, IViewError
     {
         public GWydiRUI()
         {
@@ -116,6 +116,32 @@ namespace GWydiRUI
         public void DeRegisterRunButton(EventHandler handler)
         {
             UploadRunButton.Click -= handler;
+        }
+
+        public void NotifyOfError(Exception e)
+        {
+            MessageBox.Show(e.Message);
+        }
+
+
+        public string GetAppStorageContainerName()
+        {
+            return AppStorageContainerNameTextBox.Text;
+        }
+
+        public void SetAppStorageContainerName(string appStorageContainerName)
+        {
+            AppStorageContainerNameTextBox.Text = appStorageContainerName;
+        }
+
+        public string GetDataStorageContainerName()
+        {
+            return DataStorageContainerNameTextBox.Text;
+        }
+
+        public void SetDataStorageContainerName(string dataStorageContainerName)
+        {
+            DataStorageContainerNameTextBox.Text = dataStorageContainerName;
         }
     }
 }
