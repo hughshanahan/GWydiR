@@ -6,6 +6,7 @@ using GWydiR.Interfaces.ModelInterfaces;
 using GWydiR.Interfaces.ViewInterfaces;
 using GWydiR.Utilities;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace GWydiR.Models
 {
@@ -53,8 +54,8 @@ namespace GWydiR.Models
             NumberOfInstances = view.GetInstanceCount();
             wizard.InstanceCount = NumberOfInstances;
             wizard.WriteConfigurationFile();
-            ITabNavigation navView = castNavigationView(view);
-            //navView.ChangeTab(TabNumber + 1); //Doesn't exist yet
+            
+            //Need to open GWyDirUI and Close this UI.
             
             //Need to copy file defining VM onto the desktop
             VMSize = view.GetVmSize();
@@ -66,6 +67,11 @@ namespace GWydiR.Models
             {
                 ((IViewError)view).NotifyOfError(exc);
             }
+
+            // Start GWydiRUI window
+            Process GwydirUI = new Process();
+            GwydirUI.StartInfo.FileName = ConfigurationManager.AppSettings.Get("GWydiRUI");
+            GwydirUI.Start();
 
         }
 

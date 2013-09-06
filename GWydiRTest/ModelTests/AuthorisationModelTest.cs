@@ -32,6 +32,7 @@ namespace GWydiRTest.ModelTests
             private IViewError mockErrorView;
             private CertificateMaker mockMaker;
             private FileWriter mockWriter { get; set; }
+            private X509Store mockStore;
 
             public OverRiddenAuthorisationModel_1(IAuthorisationView view) : base(view) { }
             public OverRiddenAuthorisationModel_1(IAuthorisationView view, IWizard w) : base(view, w) { }
@@ -51,11 +52,12 @@ namespace GWydiRTest.ModelTests
             {
                 this.mockErrorView = mockErrorView;
             }
-            public OverRiddenAuthorisationModel_1(IAuthorisationView view, IWizard w, CertificateMaker mockMaker, FileWriter mockWriter)
+            public OverRiddenAuthorisationModel_1(IAuthorisationView view, IWizard w, CertificateMaker mockMaker, FileWriter mockWriter, X509Store mockStore)
                 : base(view, w)
             {
                 this.mockMaker = mockMaker;
                 this.mockWriter = mockWriter;
+                this.mockStore = mockStore;
             }
 
             public override ITabNavigation CastITabNavigation(IAuthorisationView view)
@@ -85,6 +87,10 @@ namespace GWydiRTest.ModelTests
                 return mockWriter;
             }
 
+            protected override X509Store makeStore(StoreName storeName, StoreLocation storeLocation)
+            {
+                return mockStore;
+            }
             
         }
 
@@ -389,7 +395,13 @@ namespace GWydiRTest.ModelTests
             mockCert.Stub(x => x.GetCertificateStream()).Return(new System.IO.MemoryStream());
             mockMaker.Expect(x => x.MakeCertificate(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(mockCert);
 
-            model = new OverRiddenAuthorisationModel_1(mockView, mockWizard, mockMaker, mockWriter);
+            X509Store mockStore = MockRepository.GenerateStub<X509Store>(Arg<StoreName>.Is.Anything, Arg<StoreLocation>.Is.Anything);
+            mockStore.Expect(x => x.Open(Arg<OpenFlags>.Is.Anything));
+            mockStore.Expect(x => x.Add(mockCert2));
+            mockStore.Expect(x => x.Close());
+
+
+            model = new OverRiddenAuthorisationModel_1(mockView, mockWizard, mockMaker, mockWriter, mockStore);
 
             //Act
             model.CreateButtonHandler(new object(), new EventArgs());
@@ -398,6 +410,7 @@ namespace GWydiRTest.ModelTests
             mockView.VerifyAllExpectations();
             mockMaker.VerifyAllExpectations();
             mockWriter.VerifyAllExpectations();
+            mockStore.VerifyAllExpectations();
 
         }
 

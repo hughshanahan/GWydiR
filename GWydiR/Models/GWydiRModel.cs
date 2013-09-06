@@ -6,6 +6,7 @@ using GWydiR.Interfaces.ModelInterfaces;
 using GWydiR.Utilities;
 using System.Diagnostics;
 using System.Configuration;
+using System.IO;
 
 namespace GWydiR.Models
 {
@@ -19,7 +20,7 @@ namespace GWydiR.Models
 
         public GWydiRModel()
         {
-            paramFilePath = ConfigurationManager.AppSettings.Get("ParamFolderPath");
+            paramFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             GWydiRAppExeName = ConfigurationManager.AppSettings.Get("GWydiRAppPath");
         }
 
@@ -56,7 +57,7 @@ namespace GWydiR.Models
             // make a list of strings with the key and value pairs for the parameter file
             List<string> parameters = new List<string>();
 
-            // if doUpload == tru then put y else n
+            // if doUpload == true then put y else n
             parameters.Add("doUpload " + ((doUpload == true) ? "y" : "n"));
             parameters.Add("dataKey " + dataStorageKey);
             parameters.Add("RFileName " + scriptFileName);
@@ -85,7 +86,8 @@ namespace GWydiR.Models
         public void Run()
         {
             Process GWydiR = new Process();
-            GWydiR.StartInfo.Arguments = paramFilePath.Replace("\\\\","\\").Replace(" ","\\ ") + paramFileName;
+            // need to abstract this out, perhaps fid method already implemented
+            GWydiR.StartInfo.Arguments = "\"" + Path.Combine( paramFilePath ,paramFileName) + "\"";
             GWydiR.StartInfo.FileName = GWydiRAppExeName;
             try
             {
@@ -110,13 +112,13 @@ namespace GWydiR.Models
 
             //First we are required to write two key files for GWydiR to read
             //One for the app store key
-            string appStoreKeyFile = paramFilePath + appStoreName + ".key";
+            string appStoreKeyFile = Path.Combine(paramFilePath, appStoreName + "_App.key");
             FileWriter fileWriter = makeFileWriter();
             fileWriter.Write(appStoreKeyFile, new List<string>() { appStoreName, appStorageKey });
 
 
             //One for the data store key
-            string dataStoreKeyFile = paramFilePath + dataStoreName + ".key";
+            string dataStoreKeyFile = Path.Combine(paramFilePath , dataStoreName + "_Data.key");
             fileWriter.Write(dataStoreKeyFile, new List<string>() { dataStoreName, dataStorageKey });
 
             // make a list of strings with the key and value pairs for the parameter file
@@ -134,7 +136,7 @@ namespace GWydiR.Models
             parameters.Add("serviceURL " + appServiceURL);
 
             //write the parameter file to a location on disk
-            fileWriter.Write(paramFilePath + paramFileName, parameters);
+            fileWriter.Write(Path.Combine(paramFilePath, paramFileName), parameters);
         }
     }
 }

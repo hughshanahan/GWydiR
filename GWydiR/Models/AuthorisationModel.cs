@@ -266,17 +266,17 @@ namespace GWydiR.Models
 
             // store both private key certificates locally in both user and loca machine stores
             // to thats general worker can have access to them
-            //X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            //store.Open(OpenFlags.ReadOnly);
-            //store.Add(certificateSTS);
-            //store.Add(certificateManagement);
-            //store.Close();
+            X509Store store = makeStore(StoreName.My, StoreLocation.CurrentUser);
+            store.Open(OpenFlags.ReadOnly);
+            store.Add(certificateSTS);
+            store.Add(certificateManagement);
+            store.Close();
 
-            //store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-            //store.Open(OpenFlags.ReadOnly);
-            //store.Add(certificateSTS);
-            //store.Add(certificateManagement);
-            //store.Close();
+            store = makeStore(StoreName.My, StoreLocation.LocalMachine);
+            store.Open(OpenFlags.ReadOnly);
+            store.Add(certificateSTS);
+            store.Add(certificateManagement);
+            store.Close();
 
             #endregion
 
@@ -288,6 +288,11 @@ namespace GWydiR.Models
             authorisationView.DisableCreate();
             authorisationView.EnableNext();           
 
+        }
+
+        protected virtual X509Store makeStore(StoreName storeName, StoreLocation storeLocation)
+        {
+            return new X509Store(storeName, storeLocation);
         }
 
         private string makeCertificatePath(string name,string extension)
