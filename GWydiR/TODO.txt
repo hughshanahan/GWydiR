@@ -1,0 +1,4 @@
+﻿- Add encrypted reader/writer classes
+- allow wizard to call those classes
+- give wizard a different more emaningfull name (also, level of abstraction is not such that it is actually the whole wizard)
+- conntect code to UI to forfill first piece of functionality
